@@ -1,0 +1,25 @@
+.box {
+	border: var(--medium-color) 1px solid;
+	border-radius: 8px;
+	flex-basis: 400px;
+	padding: 32px;
+
+	align-items: stretch;
+	justify-content: stretch;
+
+	&>* {
+		max-width: 100%;
+		width: 100%;
+	}
+}
+
+.title {
+	text-align: center;
+}
+
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
