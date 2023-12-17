@@ -4,7 +4,7 @@ import styles from './page.module.scss'
 const Home = (): ReactNode => {
   return (
     <main className={styles.main}>
-      Привт!
+      <a href="/profile">Перейти в профиль</a>
     </main>
   )
 }

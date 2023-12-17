@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 
 import styles from './page.module.scss'
 import { Box } from '@/ui/components/Box/Box.component'
+import { login } from '@/actions/login.action'
 
 const Container = dynamic(() => import('@/components/Container/Container.component'))
 const Input = dynamic(() => import('@/ui/components/Input/Input'))
@@ -15,11 +16,13 @@ const Welcome = (): ReactNode => {
 		<Container className={styles.container}>
 			<Box className={styles.box} alignItems="center" gap={16}>
 				<Title1 className={styles.title}>Войти</Title1>
-				<Box alignItems="stretch">
-					<Input placeholder="Эл. почта" name="username" autoComplete="login" />
-					<Input placeholder="Пароль" name="password" autoComplete="current-password" />
-					<Button appearance="primary" type="submit">Войти</Button>
-				</Box>
+				<form action={login}>
+					<Box alignItems="stretch">
+						<Input type="email" placeholder="Эл. почта" name="email" autoComplete="email" />
+						<Input type="password" placeholder="Пароль" name="password" autoComplete="current-password" />
+						<Button appearance="primary" type="submit">Войти</Button>
+					</Box>
+				</form>
 				<Box direction="row" justifyContent="space-between">
 					<Button appearance="link">Регистрация</Button>
 					<Button appearance="link">Забыли пароль?</Button>
