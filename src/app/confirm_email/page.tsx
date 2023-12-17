@@ -8,6 +8,7 @@ import { confirmEmail } from '@/actions/confirmEmail.action'
 const Container = dynamic(() => import('@/components/Container/Container.component'))
 const Input = dynamic(() => import('@/ui/components/Input/Input'))
 const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
+const SubmitButton = dynamic(() => import('@/components/SubmitButton/SubmitButton.component'))
 const Title1 = dynamic(() => import('@/ui/components/Title1/Title1.component'))
 
 const ConfirmEmail = (): ReactNode => {
@@ -19,7 +20,7 @@ const ConfirmEmail = (): ReactNode => {
 				<form action={confirmEmail}>
 					<Box alignItems="stretch">
 						<Input placeholder="Код подтверждения" name="code" autoComplete="off" />
-						<Button appearance="primary" type="submit">Войти</Button>
+						<SubmitButton>Подтвердить</SubmitButton>
 					</Box>
 				</form>
 				<Box direction="row" justifyContent="space-between">

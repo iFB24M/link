@@ -5,9 +5,12 @@ import styles from './page.module.scss'
 import { getUser } from '@/services/Prisma/getUser'
 import ChangeBioPopup from '@/popups/ChangeBioPopup'
 import Posts from '@/components/Posts/Posts.component'
+import ChangeAvatarPopup from '../../popups/ChangeAvatarPopup'
+import { Box } from '@/ui/components/Box/Box.component'
 
 const Container = dynamic(() => import('@/components/Container/Container.component'))
 const Body1 = dynamic(() => import('@/ui/components/Body1/Body1.component'))
+const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
 
 const Welcome = async (): Promise<ReactElement> => {
 	const user = await getUser()
@@ -18,7 +21,9 @@ const Welcome = async (): Promise<ReactElement> => {
 		<Container className={styles.container}>
 			<div className={styles.profile}>
 				<div className={styles.user}>
-					<div className={styles.avatar}></div>
+					<ChangeAvatarPopup buttonContent={
+						<div className={styles.avatar}></div>
+					} />
 					<div className={styles.counters}>
 						<div className={styles.counter}>
 							<span className={styles.count}>0</span>
@@ -44,6 +49,9 @@ const Welcome = async (): Promise<ReactElement> => {
 					<ChangeBioPopup currentBio={user?.bio} buttonText={user?.bio === null || user?.bio === '' ? 'Добавить пару строк о себе' : 'Изменить'} />
 				</div>
 			</div>
+			<Box>
+				<Button appearance="primary" className={styles.addPostButton} href="/post">Добавить запись</Button>
+			</Box>
 			<Posts />
 		</Container>
 	)

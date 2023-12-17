@@ -9,6 +9,7 @@ const Container = dynamic(() => import('@/components/Container/Container.compone
 const Input = dynamic(() => import('@/ui/components/Input/Input'))
 // const Box = dynamic(() => import('@/ui/components/Box/Box.component'))
 const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
+const SubmitButton = dynamic(() => import('@/components/SubmitButton/SubmitButton.component'))
 const Title1 = dynamic(() => import('@/ui/components/Title1/Title1.component'))
 
 const Welcome = (): ReactNode => {
@@ -20,12 +21,12 @@ const Welcome = (): ReactNode => {
 					<Box alignItems="stretch">
 						<Input type="email" placeholder="Эл. почта" name="email" autoComplete="email" />
 						<Input type="password" placeholder="Пароль" name="password" autoComplete="current-password" />
-						<Button appearance="primary" type="submit">Войти</Button>
+						<SubmitButton>Войти</SubmitButton>
 					</Box>
 				</form>
 				<Box direction="row" justifyContent="space-between">
-					<Button appearance="link">Регистрация</Button>
-					<Button appearance="link">Забыли пароль?</Button>
+					<Button appearance="link" href="/signup">Регистрация</Button>
+					<Button appearance="link" href="/restore">Забыли пароль?</Button>
 				</Box>
 			</Box>
 		</Container>

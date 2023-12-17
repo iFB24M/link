@@ -1,16 +1,21 @@
-import type { ReactNode } from 'react'
+import type { ReactElement } from 'react'
 import styles from './Posts.module.scss'
 import dynamic from 'next/dynamic'
+import { getUser } from '@/services/Prisma/getUser'
+import { getPostsByAuthorId } from '@/services/Prisma/getPostsByAuthorId'
+import { exists } from '@/functions/exists'
 
 const Post = dynamic(() => import('./Post/Post.component'))
 
-const Posts = (): ReactNode => {
+const Posts = async (): Promise<ReactElement> => {
+	const user = await getUser()
+	const posts = await getPostsByAuthorId(exists<number>(user?.id))
+
 	return (
 		<div className={styles.posts}>
-			<Post authorName="fb24m" content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, odit nihil saepe eveniet ipsa minima dolor beatae provident aspernatur eaque laboriosam reprehenderit, odio repudiandae nesciunt, illum obcaecati officiis at consectetur?" />
-			<Post authorName="fb24m" content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, odit nihil saepe eveniet ipsa minima dolor beatae provident aspernatur eaque laboriosam reprehenderit, odio repudiandae nesciunt, illum obcaecati officiis at consectetur?" />
-			<Post authorName="fb24m" content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, odit nihil saepe eveniet ipsa minima dolor beatae provident aspernatur eaque laboriosam reprehenderit, odio repudiandae nesciunt, illum obcaecati officiis at consectetur?" />
-			<Post authorName="fb24m" content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, odit nihil saepe eveniet ipsa minima dolor beatae provident aspernatur eaque laboriosam reprehenderit, odio repudiandae nesciunt, illum obcaecati officiis at consectetur?" />
+			{posts.map((post) =>
+				<Post key={post.id} authorName={exists(user?.username)} content={post?.content.split('\r\n').join('<br>')} />
+			)}
 		</div>
 	)
 }

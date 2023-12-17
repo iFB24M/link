@@ -1,0 +1,20 @@
+.form {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	align-items: flex-start;
+}
+
+.title {}
+
+.container {
+	height: calc(100% - 32px);
+}
+
+.textarea {
+	flex-grow: 1;
+	width: 100%;
+	margin-block: 12px 16px;
+	border: 0;
+	outline: 0;
+}

@@ -9,7 +9,7 @@ const Post = (props: PostProps): ReactNode => {
 				<div className={styles.avatar}></div>
 				<span className={styles.name}>{props.authorName}</span>
 			</div>
-			<div className={styles.content}>{props.content}</div>
+			<div className={styles.content} dangerouslySetInnerHTML={{ __html: props.content }}></div>
 		</div>
 	)
 }

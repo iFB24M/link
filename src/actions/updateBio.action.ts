@@ -3,7 +3,6 @@
 import { getUser } from '@/services/Prisma/getUser'
 import { updateUser } from '@/services/Prisma/updateUser'
 import { revalidatePath } from 'next/cache'
-import { cookies } from 'next/headers'
 
 export const updateBio = async (formData: FormData) => {
 	const rawData = {

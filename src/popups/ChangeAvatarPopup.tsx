@@ -3,8 +3,6 @@
 import type { ReactNode } from 'react'
 import styles from './ChangeBioPopup.module.scss'
 import dynamic from 'next/dynamic'
-import Textarea from '@/ui/components/Textarea/Textarea.component'
-import { updateBio } from '@/actions/updateBio.action'
 
 const Popup = dynamic(() => import('@/ui/components/Popup/Popup.component'))
 const PopupFooter = dynamic(() => import('@/ui/components/PopupFooter/PopupFooter.component'))
@@ -12,29 +10,27 @@ const PopupTrigger = dynamic(() => import('@/ui/components/PopupTrigger/PopupTri
 const PopupWrapper = dynamic(() => import('@/ui/components/PopupWrapper/PopupWrapper.component'))
 
 const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
-const SubmitButton = dynamic(() => import('@/components/SubmitButton/SubmitButton.component'))
 
 export interface CustomPopupProps {
-	buttonText: string
-	currentBio: string | null | undefined
+	buttonContent: ReactNode
 }
 
-const ChangeBioPopup = (props: CustomPopupProps): ReactNode => {
+const ChangeAvatarPopup = (props: CustomPopupProps): ReactNode => {
 	return (
 		<Popup className={styles.popup}>
 			<PopupWrapper>
-				<form action={updateBio}>
-					<Textarea name="new-bio" defaultValue={props.currentBio !== null ? props.currentBio : ''}></Textarea>
+				<form>
+					<input type="file" name="new-avatar" />
 					<PopupFooter>
-						<SubmitButton>Сохранить</SubmitButton>
+						<Button appearance="primary">Сохранить</Button>
 					</PopupFooter>
 				</form>
 			</PopupWrapper>
 			<PopupTrigger>
-				<Button className={styles.changeButton}>{props.buttonText}</Button>
+				<Button className={styles.changeButton}>{props.buttonContent}</Button>
 			</PopupTrigger>
 		</Popup>
 	)
 }
 
-export default ChangeBioPopup
+export default ChangeAvatarPopup
