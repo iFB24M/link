@@ -10,7 +10,7 @@ export const confirmEmail = async (formData: FormData) => {
 	}
 
 	if (cookies().get('confirm_code')?.value === rawData.code.trim()) {
-		const user = await prisma.user.create({
+		await prisma.user.create({
 			data: {
 				email: cookies().get('temp_email')!.value,
 				password: cookies().get('temp_password')!.value,
