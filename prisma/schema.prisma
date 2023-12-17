@@ -22,7 +22,7 @@ model User {
 model Post {
   id       Int     @id @default(autoincrement())
   title    String  @default("")
-  content  String
+  content  String  @db.LongText
   imageUrl String?
   authorId Int?
 }
