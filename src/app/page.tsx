@@ -11,16 +11,12 @@ const Home = async (): Promise<ReactElement> => {
   const subsribedTo: number[] =
     user?.subscribedTo?.split(',').filter(item => item && !isNaN(+item)).map(item => +item!)!
 
-  console.log(subsribedTo)
-
   const posts = await getPostsByAuthorId(subsribedTo)
-
-  console.log(posts)
 
   return (
     <Container className={styles.posts}>
 
-      {posts.length ? posts.map((post) => <Post authorName={`${post.authorId}`} content={post.content} />) : 'Похоже, вы ни на кого не подписаны :('}
+      {posts.length ? posts.map((post) => <Post authorId={post?.authorId!} content={post.content} />).reverse() : 'Похоже, вы ни на кого не подписаны :('}
       <a href="/profile">Перейти в профиль</a>
     </Container>
   )

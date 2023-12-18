@@ -1,5 +1,5 @@
 export interface PostProps {
-	authorName: string
+	authorId: number
 	authorAvatarUrl?: string
 	imageUrl?: string
 	content: string

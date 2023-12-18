@@ -16,8 +16,6 @@ const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
 const Welcome = async (): Promise<ReactElement> => {
 	const user = await getUser()
 
-	console.log(user)
-
 	return (
 		<Container className={styles.container}>
 			<div className={styles.profile}>

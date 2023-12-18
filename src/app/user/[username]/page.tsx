@@ -39,7 +39,7 @@ const Welcome = async (props: { params: { username: string } }): Promise<ReactEl
 					{user?.username} <form action={subscribe}>
 						<input type="text" name="channel-id" readOnly className={styles.channelId} value={user?.id} />
 						<SubmitButton>
-							{await checkSubscription(user?.id!) ? 'Описаться' : 'Подписаться'}
+							{await checkSubscription(user?.id!) ? 'Отписаться' : 'Подписаться'}
 						</SubmitButton>
 					</form>
 				</div>
@@ -49,7 +49,7 @@ const Welcome = async (props: { params: { username: string } }): Promise<ReactEl
 					</Body1>
 				</div>
 			</div>
-			<Posts authorId={exists(user?.id)} username={exists(user?.username)} />
+			<Posts authorId={exists(user?.id)} />
 		</Container>
 	)
 }
