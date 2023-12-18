@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { getUser } from '@/services/Prisma/getUser'
 
 const Profile = async (): Promise<ReactElement> => {
-	const user = await getUser()
+	const user = await getUser(false)
 
 	return (
 		<Link href="/profile" className={styles.profile}>
