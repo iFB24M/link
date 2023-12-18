@@ -13,7 +13,7 @@ const Posts = async (props: { authorId: number, username: string }): Promise<Rea
 		<div className={styles.posts}>
 			{posts.map((post) =>
 				<Post key={post.id} authorName={props.username} content={post?.content.split('\r\n').join('<br>')} />
-			)}
+			).reverse()}
 		</div>
 	)
 }

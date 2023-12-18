@@ -11,18 +11,20 @@ datasource db {
 }
 
 model User {
-  id       Int     @id @default(autoincrement())
-  avatar   String?
-  email    String  @unique
-  username String  @unique
-  password String
-  bio      String?
+  id           Int     @id @default(autoincrement())
+  avatar       String?
+  email        String  @unique
+  username     String  @unique
+  password     String
+  bio          String?
+  subscribedTo String?
 }
 
 model Post {
-  id       Int     @id @default(autoincrement())
-  title    String  @default("")
-  content  String  @db.LongText
-  imageUrl String?
-  authorId Int?
+  publishDate DateTime? @default(now())
+  id          Int       @id @default(autoincrement())
+  title       String    @default("")
+  content     String    @db.LongText
+  imageUrl    String?
+  authorId    Int?
 }
