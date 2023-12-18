@@ -51,7 +51,7 @@ const Welcome = async (): Promise<ReactElement> => {
 			<Box>
 				<Button appearance="primary" className={styles.addPostButton} href="/post">Добавить запись</Button>
 			</Box>
-			<Posts authorId={exists(user?.id)} username={exists(user?.username)} />
+			<Posts authorId={exists(user?.id)} />
 		</Container>
 	)
 }
