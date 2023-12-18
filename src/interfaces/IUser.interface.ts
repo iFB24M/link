@@ -3,4 +3,6 @@ export interface IUser {
 	email?: string
 	bio?: string
 	avatar?: string
+	subscribedTo?: string
+	subscribers?: number
 }

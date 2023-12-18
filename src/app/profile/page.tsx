@@ -31,7 +31,7 @@ const Welcome = async (): Promise<ReactElement> => {
 							<span className={styles.description}>друзья</span>
 						</div>
 						<div className={styles.counter}>
-							<span className={styles.count}>342</span>
+							<span className={styles.count}>{+user?.subscribers!}</span>
 							<span className={styles.description}>подписчики</span>
 						</div>
 						<div className={styles.counter}>

@@ -1,9 +1,10 @@
 import type { ReactNode } from 'react'
 import styles from './Logo.module.scss'
+import Link from 'next/link'
 
 const Logo = (): ReactNode => {
 	return (
-		<div className={styles.logo}>Link</div>
+		<Link href="/" className={styles.logo}>Link</Link>
 	)
 }
 

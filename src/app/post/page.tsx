@@ -7,7 +7,7 @@ import { createPost } from '@/actions/createPost.action'
 const Container = dynamic(() => import('@/components/Container/Container.component'))
 const SubmitButton = dynamic(() => import('@/components/SubmitButton/SubmitButton.component'))
 
-const Post = (props: any): ReactNode => {
+const Post = (): ReactNode => {
 	return (
 		<Container className={styles.container}>
 			<Title1 className={styles.title}>Новый пост</Title1>

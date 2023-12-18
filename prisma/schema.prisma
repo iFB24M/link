@@ -18,6 +18,7 @@ model User {
   password     String
   bio          String?
   subscribedTo String?
+  subscribers  Int?
 }
 
 model Post {
@@ -26,5 +27,5 @@ model Post {
   title       String    @default("")
   content     String    @db.LongText
   imageUrl    String?
-  authorId    Int?
+  authorId    Int?      @default(0)
 }

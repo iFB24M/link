@@ -7,12 +7,12 @@ import { exists } from '@/functions/exists'
 const Post = dynamic(() => import('./Post/Post.component'))
 
 const Posts = async (props: { authorId: number, username: string }): Promise<ReactElement> => {
-	const posts = await getPostsByAuthorId(exists<number>(props.authorId))
+	const posts = await getPostsByAuthorId([exists<number>(props.authorId)])
 
 	return (
 		<div className={styles.posts}>
-			{posts.map((post) =>
-				<Post key={post.id} authorName={props.username} content={post?.content.split('\r\n').join('<br>')} />
+			{posts?.map((post) =>
+				<Post key={post.id} date={post?.publishDate} authorName={props.username} content={post?.content.split('\r\n').join('<br>')} />
 			).reverse()}
 		</div>
 	)

@@ -1,11 +1,14 @@
-import type { ReactNode } from 'react'
+import type { ReactElement } from 'react'
 import styles from './Profile.module.scss'
 import Link from 'next/link'
+import { getUser } from '@/services/Prisma/getUser'
 
-const Profile = (): ReactNode => {
+const Profile = async (): Promise<ReactElement> => {
+	const user = await getUser()
+
 	return (
 		<Link href="/profile" className={styles.profile}>
-			fb24m
+			{user?.username}
 		</Link>
 	)
 }

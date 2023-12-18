@@ -1,6 +1,7 @@
 'use server'
 
 import { createPost as prisma_createPost } from '@/services/Prisma/createPost'
+import { redirect } from 'next/navigation'
 
 export const createPost = async (formData: FormData) => {
 	const rawData = {
@@ -8,4 +9,5 @@ export const createPost = async (formData: FormData) => {
 	}
 
 	await prisma_createPost(rawData.content)
+	redirect('/profile')
 }
