@@ -2,9 +2,11 @@ import type { ReactElement, ReactNode } from 'react'
 import styles from './page.module.scss'
 import { getUser } from '@/services/Prisma/getUser'
 import { getPostsByAuthorId } from '@/services/Prisma/getPostsByAuthorId'
-import Posts from '@/components/Posts/Posts.component'
-import Post from '@/components/Posts/Post/Post.component'
 import Container from '@/components/Container/Container.component'
+import dynamic from 'next/dynamic'
+import { IPost } from '@/interfaces/IPost.interface'
+
+const Posts = dynamic(() => import('@/components/Posts/Posts.component'))
 
 const Home = async (): Promise<ReactElement> => {
   const user = await getUser()
@@ -16,7 +18,7 @@ const Home = async (): Promise<ReactElement> => {
   return (
     <Container className={styles.posts}>
 
-      {posts.length ? posts.map((post) => <Post authorId={post?.authorId!} content={post.content} />).reverse() : 'Похоже, вы ни на кого не подписаны :('}
+      <Posts posts={posts as IPost[]} />
       <a href="/profile">Перейти в профиль</a>
     </Container>
   )

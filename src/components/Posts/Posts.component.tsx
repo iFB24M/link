@@ -1,18 +1,15 @@
 import type { ReactElement } from 'react'
 import styles from './Posts.module.scss'
 import dynamic from 'next/dynamic'
-import { getPostsByAuthorId } from '@/services/Prisma/getPostsByAuthorId'
-import { exists } from '@/functions/exists'
+import { IPost } from '@/interfaces/IPost.interface'
 
 const Post = dynamic(() => import('./Post/Post.component'))
 
-const Posts = async (props: { authorId: number }): Promise<ReactElement> => {
-	const posts = await getPostsByAuthorId([exists<number>(props.authorId)])
-
+const Posts = async (props: { posts: IPost[], controls?: boolean }): Promise<ReactElement> => {
 	return (
 		<div className={styles.posts}>
-			{posts?.map((post) =>
-				<Post key={post.id} date={post?.publishDate} authorId={props.authorId} content={post?.content.split('\r\n').join('<br>')} />
+			{props.posts?.map((post) =>
+				<Post key={post.id} id={post.id} controls={props.controls} date={post?.publishDate} authorId={post.authorId!} content={post?.content.split('\r\n').join('<br>')} />
 			).reverse()}
 		</div>
 	)

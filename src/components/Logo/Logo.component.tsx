@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 const Logo = (): ReactNode => {
 	return (
-		<Link href="/" className={styles.logo}>Link</Link>
+		<Link href="/" className={styles.logo}>NextLink</Link>
 	)
 }
 

@@ -18,7 +18,6 @@ export const login = async (formData: FormData) => {
 	})
 
 	if (user === null) {
-		console.log('user not found')
 		return {}
 	}
 

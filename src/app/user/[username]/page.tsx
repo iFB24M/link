@@ -8,12 +8,15 @@ import { exists } from '@/functions/exists'
 import SubmitButton from '../../../components/SubmitButton/SubmitButton.component';
 import { subscribe } from '@/actions/subscribe.action'
 import { checkSubscription } from '@/services/Prisma/checkSubscription'
+import { getPostsByAuthorId } from '@/services/Prisma/getPostsByAuthorId'
+import { IPost } from '@/interfaces/IPost.interface'
 
 const Container = dynamic(() => import('@/components/Container/Container.component'))
 const Body1 = dynamic(() => import('@/ui/components/Body1/Body1.component'))
 
 const Welcome = async (props: { params: { username: string } }): Promise<ReactElement> => {
 	const user = await getUserByUsername(props.params.username)
+	const posts = await getPostsByAuthorId([exists(user?.id)])
 
 	return (
 		<Container className={styles.container}>
@@ -30,7 +33,7 @@ const Welcome = async (props: { params: { username: string } }): Promise<ReactEl
 							<span className={styles.description}>подписчики</span>
 						</div>
 						<div className={styles.counter}>
-							<span className={styles.count}>0</span>
+							<span className={styles.count}>{posts.length}</span>
 							<span className={styles.description}>записи</span>
 						</div>
 					</div>
@@ -49,7 +52,7 @@ const Welcome = async (props: { params: { username: string } }): Promise<ReactEl
 					</Body1>
 				</div>
 			</div>
-			<Posts authorId={exists(user?.id)} />
+			<Posts posts={posts as IPost[]} />
 		</Container>
 	)
 }

@@ -11,8 +11,6 @@ export const subscribe = async (formData: FormData) => {
 	const channel = await getUserById(+channelId)
 	const user = await getUser()
 
-	console.log(channelId, user)
-
 	if (await checkSubscription(+channelId)) {
 		await updateUser(channel?.email!, channel?.password!, {
 			subscribers: channel?.subscribers! - 1

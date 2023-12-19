@@ -10,6 +10,4 @@ export const updateUser = async (email: string, password: string, data: IUser) =
 		},
 		data
 	})
-
-	console.log(updatedUser)
 }

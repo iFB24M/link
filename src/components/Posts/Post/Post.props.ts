@@ -4,4 +4,6 @@ export interface PostProps {
 	imageUrl?: string
 	content: string
 	date?: Date | null
+	controls?: boolean
+	id: number
 }

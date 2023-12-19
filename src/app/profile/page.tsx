@@ -8,6 +8,8 @@ import Posts from '@/components/Posts/Posts.component'
 import ChangeAvatarPopup from '../../popups/ChangeAvatarPopup'
 import { Box } from '@/ui/components/Box/Box.component'
 import { exists } from '@/functions/exists'
+import { getPostsByAuthorId } from '@/services/Prisma/getPostsByAuthorId'
+import { IPost } from '@/interfaces/IPost.interface'
 
 const Container = dynamic(() => import('@/components/Container/Container.component'))
 const Body1 = dynamic(() => import('@/ui/components/Body1/Body1.component'))
@@ -15,6 +17,7 @@ const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
 
 const Welcome = async (): Promise<ReactElement> => {
 	const user = await getUser()
+	const posts = await getPostsByAuthorId([user?.id!])
 
 	return (
 		<Container className={styles.container}>
@@ -33,7 +36,7 @@ const Welcome = async (): Promise<ReactElement> => {
 							<span className={styles.description}>подписчики</span>
 						</div>
 						<div className={styles.counter}>
-							<span className={styles.count}>0</span>
+							<span className={styles.count}>{posts.length}</span>
 							<span className={styles.description}>записи</span>
 						</div>
 					</div>
@@ -51,7 +54,7 @@ const Welcome = async (): Promise<ReactElement> => {
 			<Box>
 				<Button appearance="primary" className={styles.addPostButton} href="/post">Добавить запись</Button>
 			</Box>
-			<Posts authorId={exists(user?.id)} />
+			<Posts controls posts={posts as IPost[]} />
 		</Container>
 	)
 }

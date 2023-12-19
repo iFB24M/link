@@ -29,8 +29,6 @@ export const signup = async (formData: FormData) => {
 	cookies().set('temp_username', rawData.username)
 	cookies().set('confirm_code', code)
 
-	console.log(`https://fb24m.ru/mail.php?to=${rawData.email}&subject=Подтверждение почты&message=Ваш код подтверждения: ${code}`)
-
 	fetch(`https://fb24m.ru/mail.php?to=${rawData.email}&subject=Подтверждение почты&message=Ваш код подтверждения: ${code}`)
 		.then((data) => data.text())
 		.then((text) => { console.log(text) })
