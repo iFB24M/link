@@ -34,7 +34,7 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 		<div className={styles.post}>
 			<div className={styles.author}>
 				<div className={styles.avatar}></div>
-				<Link href={`/user/${user?.username}`} className={styles.name}>{user?.username}</Link>
+				<Link href={`/user/${user?.username}`} className={styles.name}>{user?.username}</Link> <span className={styles.badge}>{user?.badge}</span>
 				<span className={styles.date}>{props.date?.getDate()} {months[props.date?.getMonth()!]}, {props.date?.getFullYear()}</span>
 				{props.controls ?
 					<div className={styles.actions}>

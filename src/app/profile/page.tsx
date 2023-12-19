@@ -7,7 +7,6 @@ import ChangeBioPopup from '@/popups/ChangeBioPopup'
 import Posts from '@/components/Posts/Posts.component'
 import ChangeAvatarPopup from '../../popups/ChangeAvatarPopup'
 import { Box } from '@/ui/components/Box/Box.component'
-import { exists } from '@/functions/exists'
 import { getPostsByAuthorId } from '@/services/Prisma/getPostsByAuthorId'
 import { IPost } from '@/interfaces/IPost.interface'
 
@@ -42,7 +41,7 @@ const Welcome = async (): Promise<ReactElement> => {
 					</div>
 				</div>
 				<div className={styles.username}>
-					{user?.username}
+					{user?.username} <span className={styles.badge}>{user?.badge}</span>
 				</div>
 				<div className={styles.about}>
 					<Body1 className={styles.bio}>

@@ -10,9 +10,23 @@ import { subscribe } from '@/actions/subscribe.action'
 import { checkSubscription } from '@/services/Prisma/checkSubscription'
 import { getPostsByAuthorId } from '@/services/Prisma/getPostsByAuthorId'
 import { IPost } from '@/interfaces/IPost.interface'
+import { Metadata } from 'next'
 
 const Container = dynamic(() => import('@/components/Container/Container.component'))
 const Body1 = dynamic(() => import('@/ui/components/Body1/Body1.component'))
+
+export const generateMetadata = async (props: { params: { username: string } }): Promise<Metadata> => {
+	const user = await getUserByUsername(props.params.username)
+
+	return {
+		title: `Профиль ${user?.username} в NextLink`,
+		description: `${user?.bio ? user.bio : 'Описание отсутствует'}`,
+		openGraph: {
+			title: `Профиль ${user?.username} в NextLink`,
+			description: `${user?.bio ? user.bio : 'Описание отсутствует'}`,
+		}
+	}
+}
 
 const Welcome = async (props: { params: { username: string } }): Promise<ReactElement> => {
 	const user = await getUserByUsername(props.params.username)
@@ -39,7 +53,7 @@ const Welcome = async (props: { params: { username: string } }): Promise<ReactEl
 					</div>
 				</div>
 				<div className={styles.username}>
-					{user?.username} <form action={subscribe}>
+					{user?.username} <span className={styles.badge}>{user?.badge}</span> <form action={subscribe}>
 						<input type="text" name="channel-id" readOnly className={styles.channelId} value={user?.id} />
 						<SubmitButton>
 							{await checkSubscription(user?.id!) ? 'Отписаться' : 'Подписаться'}

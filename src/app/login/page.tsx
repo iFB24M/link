@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import styles from './page.module.scss'
 import { Box } from '@/ui/components/Box/Box.component'
 import { login } from '@/actions/login.action'
+import { Metadata } from 'next'
 
 const Container = dynamic(() => import('@/components/Container/Container.component'))
 const Input = dynamic(() => import('@/ui/components/Input/Input'))
@@ -11,6 +12,15 @@ const Input = dynamic(() => import('@/ui/components/Input/Input'))
 const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
 const SubmitButton = dynamic(() => import('@/components/SubmitButton/SubmitButton.component'))
 const Title1 = dynamic(() => import('@/ui/components/Title1/Title1.component'))
+
+export const metadata: Metadata = {
+	title: 'Вход - NextLink',
+	description: 'Войдите в аккаунт на NextLink, чтобы смотреть читать посты и подписываться на друзей',
+	openGraph: {
+		title: 'Вход - NextLink',
+		description: 'Войдите в аккаунт на NextLink, чтобы смотреть читать посты и подписываться на друзей',
+	}
+}
 
 const Welcome = (): ReactNode => {
 	return (

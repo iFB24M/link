@@ -19,6 +19,7 @@ model User {
   bio          String?
   subscribedTo String?
   subscribers  Int?
+  badge        String?
 }
 
 model Post {
