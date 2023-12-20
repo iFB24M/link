@@ -7,12 +7,25 @@ import Link from 'next/link';
 
 const Header = (): ReactNode => {
 	return (
-		<div className={styles.header}>
-			<Container className={styles.container}>
-				<Logo />
-				<Profile />
-			</Container>
-		</div>
+		<>
+			<div className={styles.subheader}>
+				<Container className={styles.container}>
+					<Link className={styles.fb24m} href="https://web.fb24m.ru?utm_source=next-link">
+						<img className={styles.logo} src="https://www.fb24m.ru/fb24m/wp-content/uploads/2023/12/logo-1.png" alt="fb24m Logo" />
+						fb24m | Pet
+					</Link>
+				</Container>
+			</div >
+			<div className={styles.header}>
+				<Container className={styles.container}>
+					<Logo />
+					<ul className={styles.menu}>
+						<li className={styles.menuItem}><Link href="/post" className={styles.link}>Новый пост</Link></li>
+					</ul>
+					<Profile />
+				</Container>
+			</div>
+		</>
 	)
 }
 

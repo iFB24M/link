@@ -32,7 +32,7 @@ const Signup = async (): Promise<ReactElement> => {
 						<Input required type="text" placeholder="Придумайте имя пользователя" name="username" autoComplete="username" />
 						<Input required type="password" placeholder="Придумайте пароль" name="password" autoComplete="new-password" />
 						<Input required type="password" placeholder="Повторите пароль" name="repeat-password" autoComplete="new-password" />
-						<SubmitButton>Регистрация</SubmitButton>
+						<SubmitButton icon="send">Регистрация</SubmitButton>
 					</Box>
 				</form>
 				<Box direction="row" justifyContent="space-between">

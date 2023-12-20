@@ -13,7 +13,7 @@ const Post = (): ReactNode => {
 			<Title1 className={styles.title}>Новый пост</Title1>
 			<form action={createPost} className={styles.form}>
 				<textarea className={styles.textarea} name="content" id="" placeholder="Текст поста"></textarea>
-				<SubmitButton>Добавить</SubmitButton>
+				<SubmitButton icon="post_add">Добавить</SubmitButton>
 			</form>
 		</Container>
 	)

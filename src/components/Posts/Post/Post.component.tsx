@@ -8,7 +8,7 @@ import ActionButton from '@/components/ActionButton/ActionButton.component'
 import { deletePost } from '@/actions/deletePost.action'
 
 const months = [
-	'января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'новября', 'декабря'
+	'янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'нояб', 'дек'
 ]
 
 const Post = async (props: PostProps): Promise<ReactElement> => {
@@ -28,18 +28,20 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 		content = content.replace(inside, `<del>${inside.split('~~').join('')}</del>`)
 	})
 
-	console.log(content)
-
 	return (
 		<div className={styles.post}>
 			<div className={styles.author}>
 				<div className={styles.avatar}></div>
-				<Link href={`/user/${user?.username}`} className={styles.name}>{user?.username}</Link> <span className={styles.badge}>{user?.badge}</span>
-				<span className={styles.date}>{props.date?.getDate()} {months[props.date?.getMonth()!]}, {props.date?.getFullYear()}</span>
+				<div className={styles.userdata}>
+					<Link href={`/user/${user?.username}`} className={styles.name}>{user?.username}</Link>
+					<span className={styles.date}>
+						{props.date?.getDate()} {months[props.date?.getMonth()!]} {props.date?.getFullYear()} {props.date?.getHours()}:{props.date?.getMinutes() && props.date?.getMinutes() <= 9 ? `0${props.date?.getMinutes()}` : props.date?.getMinutes()}
+					</span>
+				</div>
 				{props.controls ?
 					<div className={styles.actions}>
-						<ActionButton appearance="transparent" icon="search" fields={[{ name: 'post-id', value: `${props.id}` }]} action={deletePost}></ActionButton>
-						<Button appearance="primary">change</Button>
+						<ActionButton appearance="transparent" icon="delete" fields={[{ name: 'post-id', value: `${props.id}` }]} action={deletePost}></ActionButton>
+						<Button appearance="transparent" icon="edit" href={`/edit/${props.id}`}></Button>
 					</div> : ''}
 			</div>
 			<div className={styles.content} dangerouslySetInnerHTML={{ __html: content }}></div>

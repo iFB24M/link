@@ -11,6 +11,8 @@
 
 .button {
 	display: flex;
+	align-items: center;
+	gap: 6px;
 	background-color: transparent;
 	border: 0;
 	outline: 0;
@@ -46,8 +48,19 @@
 	}
 
 	&.primary {
+		transition: opacity .3s;
 		background-color: var(--accent-color);
 		color: var(--background-color);
+
+		@media(hover:hover) {
+			&:hover {
+				opacity: .8;
+			}
+		}
+
+		&:active {
+			opacity: .7;
+		}
 	}
 
 	&.transparent {

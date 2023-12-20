@@ -31,7 +31,7 @@ const Welcome = (): ReactNode => {
 					<Box alignItems="stretch">
 						<Input type="email" placeholder="Эл. почта" name="email" autoComplete="email" />
 						<Input type="password" placeholder="Пароль" name="password" autoComplete="current-password" />
-						<SubmitButton>Войти</SubmitButton>
+						<SubmitButton icon="login">Войти</SubmitButton>
 					</Box>
 				</form>
 				<Box direction="row" justifyContent="space-between">

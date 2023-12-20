@@ -6,7 +6,7 @@ import Button from '@/ui/components/Button/Button.component'
 const ActionButton = ({ action, fields, ...props }: ActionButton): ReactNode => {
 	return (
 		<form action={action}>
-			{fields?.map((field) => <input className={styles.field} type="text" name={field.name} value={field.value} readOnly />)}
+			{fields?.map((field) => <input key={field.name} className={styles.field} type="text" name={field.name} value={field.value} readOnly />)}
 			<Button type="submit" {...props} />
 		</form>
 	)

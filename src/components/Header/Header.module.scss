@@ -2,8 +2,47 @@
 	border-bottom: var(--medium-color) 1px solid;
 }
 
-.container {
+.header .container {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	gap: 16px 32px;
+	// flex-wrap: wrap;
+
+	@media (max-width: 560px) {
+		flex-direction: column;
+	}
+}
+
+.menu {
+	display: flex;
+	gap: 4px 16px;
+	justify-content: center;
+	// font-weight: w;
+	flex-wrap: wrap;
+}
+
+.fb24m {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	font-weight: 700;
+	font-size: 28px;
+}
+
+.subheader {
+	background-color: #000;
+	color: #fff;
+
+	.container {
+		display: flex;
+
+		@media (max-width: 560px) {
+			justify-content: center;
+		}
+	}
+}
+
+.logo {
+	max-width: 36px;
 }

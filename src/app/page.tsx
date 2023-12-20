@@ -1,4 +1,4 @@
-import type { ReactElement, ReactNode } from 'react'
+import type { ReactElement } from 'react'
 import styles from './page.module.scss'
 import { getUser } from '@/services/Prisma/getUser'
 import { getPostsByAuthorId } from '@/services/Prisma/getPostsByAuthorId'
