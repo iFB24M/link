@@ -1,7 +1,7 @@
-import { prisma } from "@/services/Prisma.service";
-import { NextApiRequest } from "next";
+import { prisma } from '@/services/Prisma.service'
+import { NextRequest } from 'next/server'
 
-export const GET = async (request: NextApiRequest, { params }: { params: { ids: string } }) => {
+export const GET = async (request: NextRequest, { params }: { params: { ids: string } }) => {
 
 	const idsArray = params.ids.split(',').map(item => +item)
 
