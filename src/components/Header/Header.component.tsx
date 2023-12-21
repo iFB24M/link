@@ -21,6 +21,7 @@ const Header = (): ReactNode => {
 					<Logo />
 					<ul className={styles.menu}>
 						<li className={styles.menuItem}><Link href="/post" className={styles.link}>Новый пост</Link></li>
+						<li className={styles.menuItem}><Link href="/messenger" className={styles.link}>Сообщения</Link></li>
 					</ul>
 					<Profile />
 				</Container>

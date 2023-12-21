@@ -1,0 +1,17 @@
+.form {
+	display: flex;
+	width: 100%;
+	gap: 8px;
+}
+
+.input {
+	flex-grow: 1;
+}
+
+.button {
+	padding: 0 8px !important;
+
+	i {
+		transform: translateX(1px);
+	}
+}

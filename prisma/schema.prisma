@@ -30,3 +30,11 @@ model Post {
   imageUrl    String?
   authorId    Int?      @default(0)
 }
+
+model Message {
+  id       Int      @id @default(autoincrement())
+  chatName String
+  date     DateTime @default(now())
+  author   String?
+  content  String
+}
