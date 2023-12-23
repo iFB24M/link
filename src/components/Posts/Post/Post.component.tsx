@@ -16,6 +16,11 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 
 	let content = props.content
 
+	const publishDate = props.date
+
+	const date = `${props.date?.getDate()} ${months[props.date?.getMonth()!]} ${props.date?.getFullYear()}`
+	const time = `${props.date?.getHours()! + 3}:${props.date?.getMinutes() && props.date?.getMinutes() <= 9 ? `0${props.date?.getMinutes()}` : props.date?.getMinutes()}`
+
 	props.content.match(/\*\*[а-яA-Яa-zA-Z0-9!"№;%:?()_+@#$^&-= ]+\*\*/gm)?.forEach((inside) => {
 		content = content.replace(inside, `<strong>${inside.split('**').join('')}</strong>`)
 	})
@@ -39,7 +44,7 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 				<div className={styles.userdata}>
 					<Link href={`/user/${user?.username}`} className={styles.name}>{user?.username}</Link>
 					<span className={styles.date}>
-						{props.date?.getDate()} {months[props.date?.getMonth()!]} {props.date?.getFullYear()} {props.date?.getHours()! + 3}:{props.date?.getMinutes() && props.date?.getMinutes() <= 9 ? `0${props.date?.getMinutes()}` : props.date?.getMinutes()}
+						{publishDate ? `${date} ${time}` : '1 янв 1970 00:00'}
 					</span>
 				</div>
 				{props.controls ?
