@@ -39,7 +39,7 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 				<div className={styles.userdata}>
 					<Link href={`/user/${user?.username}`} className={styles.name}>{user?.username}</Link>
 					<span className={styles.date}>
-						{props.date?.getDate()} {months[props.date?.getMonth()!]} {props.date?.getFullYear()} {props.date?.getHours()}:{props.date?.getMinutes() && props.date?.getMinutes() <= 9 ? `0${props.date?.getMinutes()}` : props.date?.getMinutes()}
+						{props.date?.getDate()} {months[props.date?.getMonth()!]} {props.date?.getFullYear()} {props.date?.getHours()! + 3}:{props.date?.getMinutes() && props.date?.getMinutes() <= 9 ? `0${props.date?.getMinutes()}` : props.date?.getMinutes()}
 					</span>
 				</div>
 				{props.controls ?
