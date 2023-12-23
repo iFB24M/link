@@ -6,7 +6,10 @@ import { useEffect } from 'react'
 
 export const Messages = (props: MessagesProps) => {
 	useEffect(() => {
-		console.log('update')
+		document.documentElement.scrollIntoView({
+			'behavior': 'smooth',
+			block: 'end'
+		})
 	}, [props.messages])
 
 	console.log('update')
@@ -15,7 +18,9 @@ export const Messages = (props: MessagesProps) => {
 		<div className={styles.messages}>
 			{props.messages.map((message) =>
 				<div className={`${styles.messageWrapper} ${message.author === props.user?.username ? styles.self : ''}`}>
-					<div className={styles.message}> {message.content} <br />
+					<div className={styles.message}>
+						{message.content}
+						<span className={styles.date}>{message.date.getHours()}:{message.date.getMinutes() <= 9 ? '0' + message.date.getMinutes() : message.date.getMinutes()}</span> <br />
 					</div>
 				</div>
 			)}

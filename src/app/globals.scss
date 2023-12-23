@@ -3,7 +3,7 @@
 :root {
 	--medium-color: #ddd;
 	--accent-color: #000;
-	--background-color: #eee;
+	--background-color: #fff;
 	--foreground-color: #333;
 }
 
@@ -14,4 +14,23 @@
 
 body {
 	height: 100dvh;
+	background-color: var(--background-color);
+	color: var(--foreground-color);
+}
+
+::-webkit-scrollbar {
+	background: var(--background-color);
+	width: 12px;
+	border-radius: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+	transition: border-width .5s;
+	background-color: var(--accent-color);
+	border-radius: 8px;
+	border: var(--background-color) 3px solid;
+
+	&:hover {
+		border-width: 2px;
+	}
 }

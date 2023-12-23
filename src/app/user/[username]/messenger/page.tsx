@@ -28,17 +28,26 @@ const Messenger = async ({ params }: { params: { username: string } }) => {
 	}
 
 	return (
-		<Container>
-			<Messages user={user as IUser} messages={messages as IDisplayMessage[]} />
-
-			<form action={addMessage} className={styles.form}>
-				<Container className={styles.formContainer}>
-					<input style={{ display: 'none' }} readOnly value={params.username} name="companion-username" />
-					<Input className={styles.input} placeholder="Напишите сообщение..." required name="new-message" autoComplete="off" />
-					<Button className={styles.button} icon="send" appearance="primary"></Button>
-				</Container>
-			</form>
-		</Container>
+		<main className={styles.main}>
+			<Container className={styles.container}>
+				<div className={styles.sidebar}>
+					<div className={styles.user}>
+						<span className={styles.username}>fb24m</span>
+						<span className={styles.message}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit, vero consequuntur aliquid eaque odio nostrum facere ullam repellat pariatur doloribus quasi cum dolor veritatis enim corrupti atque ducimus quaerat velit.</span>
+					</div>
+				</div>
+				<div className={styles.messenger}>
+					<Messages user={user as IUser} messages={messages as IDisplayMessage[]} />
+					<form action={addMessage} className={styles.form}>
+						<Container className={styles.formContainer}>
+							<input style={{ display: 'none' }} readOnly value={params.username} name="companion-username" />
+							<Input className={styles.input} placeholder="Напишите сообщение..." required name="new-message" autoComplete="off" />
+							<Button className={styles.button} icon="send" appearance="primary"></Button>
+						</Container>
+					</form>
+				</div>
+			</Container>
+		</main>
 	)
 }
 

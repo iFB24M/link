@@ -9,6 +9,7 @@ import SubmitButton from '../SubmitButton/SubmitButton.component'
 import Body1 from '@/ui/components/Body1/Body1.component'
 import { subscribe } from '@/actions/subscribe.action'
 import ChangeBioPopup from '@/popups/ChangeBioPopup'
+import Button from '@/ui/components/Button/Button.component'
 
 const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 	const user = await getUserByUsername(props.username)
@@ -35,13 +36,15 @@ const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 			</div>
 			<div className={styles.username}>
 				{user?.username} <span className={styles.badge}>{user?.badge}</span>
-				{!props.selfProfile ?
+				{!props.selfProfile ? <>
 					<form action={subscribe}>
 						<input type="text" name="channel-id" readOnly className={styles.channelId} value={user?.id} />
 						<SubmitButton>
 							{await checkSubscription(user?.id!) ? 'Отписаться' : 'Подписаться'}
 						</SubmitButton>
-					</form> : ''}
+					</form>
+					<Button appearance="secondary" icon="chat" href={`/user/${user?.username}/messenger`}></Button>
+				</> : ''}
 			</div>
 			<div className={styles.about}>
 				<Body1 className={styles.bio}>

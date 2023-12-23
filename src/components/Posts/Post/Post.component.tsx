@@ -40,8 +40,8 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 				</div>
 				{props.controls ?
 					<div className={styles.actions}>
-						<ActionButton appearance="transparent" icon="delete" fields={[{ name: 'post-id', value: `${props.id}` }]} action={deletePost}></ActionButton>
 						<Button appearance="transparent" icon="edit" href={`/edit/${props.id}`}></Button>
+						<ActionButton appearance="transparent" icon="delete" fields={[{ name: 'post-id', value: `${props.id}` }]} action={deletePost}></ActionButton>
 					</div> : ''}
 			</div>
 			<div className={styles.content} dangerouslySetInnerHTML={{ __html: content }}></div>

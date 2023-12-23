@@ -20,11 +20,9 @@ const Layout = ({ children }: { children: ReactNode }): ReactNode => {
     <html lang="en">
       <body className={montserrat.className}>
         <Header />
-        <main className="main">
-          <Suspense fallback={<>fdss</>}>
-            {children}
-          </Suspense>
-        </main>
+        <Suspense fallback={<>fdss</>}>
+          {children}
+        </Suspense>
       </body>
     </html>
   )
