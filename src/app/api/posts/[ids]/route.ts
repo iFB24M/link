@@ -13,10 +13,9 @@
  */
 
 import { prisma } from '@/services/Prisma.service'
-import { NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-export const GET = async (request: NextRequest, { params }: { params: { ids: string } }) => {
-
+export const GET = async (request: NextRequest, { params }: { params: { ids: string } }): Promise<any> => {
 	const idsArray = params.ids.split(',').map(item => +item)
 
 	const posts = await prisma.post.findMany({
@@ -28,7 +27,9 @@ export const GET = async (request: NextRequest, { params }: { params: { ids: str
 	})
 
 	return Response.json({
-		ok: true, message: 'success', code: 200,
-		posts: posts
+		ok: true,
+		message: 'success',
+		code: 200,
+		posts
 	})
 }

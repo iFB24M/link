@@ -2,6 +2,7 @@
 
 import { redirect } from 'next/navigation'
 import { cookies } from 'next/headers'
+import { exists } from '../functions/exists'
 
 const getRandomInt = (min: number, max: number): number => {
 	const num = Math.floor(Math.random() * max)
@@ -10,12 +11,12 @@ const getRandomInt = (min: number, max: number): number => {
 	else return getRandomInt(min, max)
 }
 
-export const signup = async (formData: FormData) => {
+export const signup = async (formData: FormData): Promise<{ ok: boolean, message: string } | null> => {
 	const rawData = {
-		email: formData.get('email')! as string,
-		username: formData.get('username')! as string,
-		password: formData.get('password')! as string,
-		repeatPassword: formData.get('repeat-password')! as string
+		email: exists(formData.get('email')) as string,
+		username: exists(formData.get('username')) as string,
+		password: exists(formData.get('password')) as string,
+		repeatPassword: exists(formData.get('repeat-password')) as string
 	}
 
 	if (rawData.password !== rawData.repeatPassword) {

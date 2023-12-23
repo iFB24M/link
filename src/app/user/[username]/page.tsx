@@ -5,8 +5,8 @@ import Posts from '@/components/Posts/Posts.component'
 import { getUserByUsername } from '@/services/Prisma/getUserByUsername'
 import { exists } from '@/functions/exists'
 import { getPostsByAuthorId } from '@/services/Prisma/getPostsByAuthorId'
-import { IPost } from '@/interfaces/IPost.interface'
-import { Metadata } from 'next'
+import type { IPost } from '@/interfaces/IPost.interface'
+import type { Metadata } from 'next'
 import UserProfile from '@/components/UserProfile/UserProfile.component'
 
 const Container = dynamic(() => import('@/components/Container/Container.component'))
@@ -16,10 +16,10 @@ export const generateMetadata = async (props: { params: { username: string } }):
 
 	return {
 		title: `Профиль ${user?.username} в NextLink`,
-		description: `${user?.bio ? user.bio : 'Описание отсутствует'}`,
+		description: `${exists(user?.bio) !== '' ? user?.bio : 'Описание отсутствует'}`,
 		openGraph: {
 			title: `Профиль ${user?.username} в NextLink`,
-			description: `${user?.bio ? user.bio : 'Описание отсутствует'}`,
+			description: `${exists(user?.bio) !== '' ? user?.bio : 'Описание отсутствует'}`
 		}
 	}
 }

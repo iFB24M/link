@@ -1,2 +1,2 @@
-export const clsx = (...args: string[]) =>
+export const clsx = (...args: string[]): string =>
 	args.join(' ')

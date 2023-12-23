@@ -2,8 +2,8 @@ import type { ReactNode } from 'react'
 import styles from './Header.module.scss'
 import Container from '../Container/Container.component'
 import Logo from '../Logo/Logo.component'
-import Profile from './Profile/Profile.component';
-import Link from 'next/link';
+import Profile from './Profile/Profile.component'
+import Link from 'next/link'
 
 const Header = (): ReactNode => {
 	return (

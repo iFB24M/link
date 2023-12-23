@@ -1,25 +1,26 @@
 'use server'
 
-import { getUser } from "@/services/Prisma/getUser"
-import { getUserByUsername } from "@/services/Prisma/getUserByUsername"
+import { getUser } from '@/services/Prisma/getUser'
+import { getUserByUsername } from '@/services/Prisma/getUserByUsername'
 
-import { addMessage as prisma_addMessage } from "@/services/Prisma/message/add"
-import { revalidatePath } from "next/cache"
+import { addMessage as prisma_addMessage } from '@/services/Prisma/message/add'
+import { revalidatePath } from 'next/cache'
+import { exists } from '../functions/exists'
 
-export const addMessage = async (formData: FormData) => {
+export const addMessage = async (formData: FormData): Promise<void> => {
 	const rawData = {
-		companion: formData.get('companion-username')! as string,
-		message: formData.get('new-message')! as string
+		companion: exists(formData.get('companion-username')) as string,
+		message: exists(formData.get('new-message')) as string
 	}
 
 	const companion = await getUserByUsername(rawData.companion)
 	const user = await getUser()
 
-	const chatName = companion?.id! < user?.id! ? `${companion?.id}+${user?.id}` : `${user?.id}+${companion?.id}`
+	const chatName = exists(companion?.id) < exists(user?.id) ? `${companion?.id}+${user?.id}` : `${user?.id}+${companion?.id}`
 
 	await prisma_addMessage({
 		chatName,
-		author: user?.username!,
+		author: exists(user?.username),
 		content: rawData.message
 	})
 

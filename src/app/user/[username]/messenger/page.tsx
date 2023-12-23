@@ -1,20 +1,29 @@
-import Container from "@/components/Container/Container.component"
-import Button from "@/ui/components/Button/Button.component"
-import Input from "@/ui/components/Input/Input"
 import styles from './page.module.scss'
-import { addMessage } from "@/actions/addMessage.action"
-import { generateChatName } from "@/services/Prisma/generateChatName"
-import { getUser } from "@/services/Prisma/getUser"
-import { getMessages } from "@/services/Prisma/message/get"
-import { Messages } from "@/components/Messenger/Messages/Messages.component"
-import { IUser } from "@/interfaces/IUser.interface"
-import { IDisplayMessage } from "@/components/Messenger/Messages/DisplayMessage.interface"
 
-const Messenger = async ({ params }: { params: { username: string } }) => {
+import type { IUser } from '@/interfaces/IUser.interface'
+import type { IDisplayMessage } from '@/components/Messenger/Messages/DisplayMessage.interface'
+import type { ReactElement } from 'react'
+
+import { addMessage } from '@/actions/addMessage.action'
+import { generateChatName } from '@/services/Prisma/generateChatName'
+import { getUser } from '@/services/Prisma/getUser'
+import { getMessages } from '@/services/Prisma/message/get'
+
+import { exists } from '@/functions/exists'
+
+import dynamic from 'next/dynamic'
+
+import { Messages } from '@/components/Messenger/Messages/Messages.component'
+
+const Container = dynamic(() => import('@/components/Container/Container.component'))
+const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
+const Input = dynamic(() => import('@/ui/components/Input/Input'))
+
+const Messenger = async ({ params }: { params: { username: string } }): Promise<ReactElement> => {
 	/* Код извлекает информацию о пользователе, генерирует имя чата на основе предоставленного имени
 	пользователя и имени пользователя, а затем извлекает сообщения для этого чата. */
 	const user = await getUser()
-	const chatName = await generateChatName(params.username, user?.username!)
+	const chatName = await generateChatName(params.username, exists(user?.username))
 	const messages = await getMessages(chatName)
 
 	/* Блок кода проверяет, выполняется ли код в среде браузера (на стороне клиента), проверяя, определен
@@ -22,8 +31,8 @@ const Messenger = async ({ params }: { params: { username: string } }) => {
 	рендеринга на стороне сервера. */
 	if (typeof window !== 'undefined') {
 		document.documentElement.scrollIntoView({
-			'block': 'end',
-			'behavior': 'smooth'
+			block: 'end',
+			behavior: 'smooth'
 		})
 	}
 

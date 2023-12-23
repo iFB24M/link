@@ -5,7 +5,7 @@ import styles from './SubmitButton.module.scss'
 import dynamic from 'next/dynamic'
 import Spinner from '@/ui/components/Spinner/Spinner.component'
 import { useFormStatus } from 'react-dom'
-import { ButtonProps } from '@/ui/components/Button/Button.props'
+import type { ButtonProps } from '@/ui/components/Button/Button.props'
 
 const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
 

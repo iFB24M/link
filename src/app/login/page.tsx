@@ -4,7 +4,7 @@ import type { ReactNode } from 'react'
 import styles from './page.module.scss'
 import { Box } from '@/ui/components/Box/Box.component'
 import { login } from '@/actions/login.action'
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 
 const Container = dynamic(() => import('@/components/Container/Container.component'))
 const Input = dynamic(() => import('@/ui/components/Input/Input'))
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 	description: 'Войдите в аккаунт на NextLink, чтобы смотреть читать посты и подписываться на друзей',
 	openGraph: {
 		title: 'Вход - NextLink',
-		description: 'Войдите в аккаунт на NextLink, чтобы смотреть читать посты и подписываться на друзей',
+		description: 'Войдите в аккаунт на NextLink, чтобы смотреть читать посты и подписываться на друзей'
 	}
 }
 

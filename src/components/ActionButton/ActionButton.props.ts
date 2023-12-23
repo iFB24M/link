@@ -1,6 +1,6 @@
 import type { ButtonProps } from '@/ui/components/Button/Button.props'
 
-export interface ActionButton extends ButtonProps {
+export interface ActionButtonProps extends ButtonProps {
 	action: (formData: FormData) => Promise<void>
-	fields?: { name: string, value: string }[]
+	fields?: Array<{ name: string, value: string }>
 }

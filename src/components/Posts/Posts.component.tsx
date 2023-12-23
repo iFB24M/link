@@ -1,7 +1,8 @@
 import type { ReactElement } from 'react'
 import styles from './Posts.module.scss'
 import dynamic from 'next/dynamic'
-import { IPost } from '@/interfaces/IPost.interface'
+import type { IPost } from '@/interfaces/IPost.interface'
+import { exists } from '../../functions/exists'
 
 const Post = dynamic(() => import('./Post/Post.component'))
 
@@ -9,7 +10,7 @@ const Posts = async (props: { posts: IPost[], controls?: boolean }): Promise<Rea
 	return (
 		<div className={styles.posts}>
 			{props.posts?.map((post) =>
-				<Post key={post.id} id={post.id} controls={props.controls} publishDate={post?.publishDate} authorId={post.authorId!} content={post?.content.split('\r\n').join('<br>')} />
+				<Post key={post.id} id={post.id} controls={props.controls} publishDate={post?.publishDate} authorId={exists(post.authorId)} content={post?.content.split('\r\n').join('<br>')} />
 			).reverse()}
 		</div>
 	)

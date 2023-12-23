@@ -1,7 +1,9 @@
 import { prisma } from '@/services/Prisma.service'
-import { NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-export const GET = async (request: NextRequest, { params }: { params: { username: string } }) => {
+const not = <T>(obj: T): boolean => typeof obj !== 'undefined' || obj !== null
+
+export const GET = async (request: NextRequest, { params }: { params: { username: string } }): Promise<any> => {
 	const searchParams = new URL(request.url).searchParams
 	const gettedPassword = searchParams.get('password')
 
@@ -9,8 +11,8 @@ export const GET = async (request: NextRequest, { params }: { params: { username
 		where: { username: params.username }
 	})
 
-	if (!gettedPassword) return Response.json({ ok: false, code: 400, message: 'password not received' })
-	if (!user) return Response.json({ ok: false, code: 404, message: `user not found` })
+	if (not(gettedPassword)) return Response.json({ ok: false, code: 400, message: 'password not received' })
+	if (not(user)) return Response.json({ ok: false, code: 404, message: 'user not found' })
 
-	return Response.json({ ok: true, code: 200, message: 'success', match_password: user.password === gettedPassword })
+	return Response.json({ ok: true, code: 200, message: 'success', match_password: user?.password === gettedPassword })
 }

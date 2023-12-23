@@ -1,15 +1,25 @@
 'use server'
 
+import { exists } from '@/functions/exists'
 import { prisma } from '../Prisma.service'
 
-export const getPostsByAuthorId = async (id: number[], maxPosts: number | false = false) => {
-	const posts = await prisma.post.findMany({
+interface IPost {
+	publishDate?: Date | null
+	id: number
+	content: string
+	title: string
+	imageUrl?: string | null
+	authortId?: number | null
+}
+
+export const getPostsByAuthorId = async (id: number[], maxPosts: number | false = false): Promise<IPost[]> => {
+	const posts: IPost[] = await prisma.post.findMany({
 		where: {
 			authorId: {
 				in: id
 			}
 		},
-		take: maxPosts ? maxPosts : 100
+		take: exists(maxPosts) === 0 ? +exists(maxPosts) : 100
 	})
 
 	return posts

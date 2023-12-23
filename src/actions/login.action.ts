@@ -3,11 +3,12 @@
 import { prisma } from '@/services/Prisma.service'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
+import { exists } from '../functions/exists'
 
-export const login = async (formData: FormData) => {
+export const login = async (formData: FormData): Promise<false | null> => {
 	const rawData = {
-		email: formData.get('email')! as string,
-		password: formData.get('password')! as string
+		email: exists(formData.get('email')) as string,
+		password: exists(formData.get('password')) as string
 	}
 
 	const user = await prisma.user.findUnique({
@@ -18,7 +19,7 @@ export const login = async (formData: FormData) => {
 	})
 
 	if (user === null) {
-		return {}
+		return false
 	}
 
 	cookies().set('link_saved_user', `${rawData.email}:${rawData.password}`)

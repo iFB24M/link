@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: 'NextLink - здесь есть только лучшие люди',
   openGraph: {
     title: 'NextLink',
-    description: 'NextLink - здесь есть только лучшие люди',
+    description: 'NextLink - здесь есть только лучшие люди'
   }
 }
 

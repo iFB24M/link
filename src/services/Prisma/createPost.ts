@@ -4,7 +4,7 @@ import { exists } from '@/functions/exists'
 import { prisma } from '../Prisma.service'
 import { getUser } from './getUser'
 
-export const createPost = async (content: string) => {
+export const createPost = async (content: string): Promise<void> => {
 	const author = await getUser()
 
 	await prisma.post.create({

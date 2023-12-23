@@ -1,8 +1,17 @@
 'use server'
 
-import { prisma } from "@/services/Prisma.service"
+import { prisma } from '@/services/Prisma.service'
 
-export const getPostById = async (id: number) => {
+interface IPost {
+	publishDate?: Date | null
+	id: number
+	content: string
+	title: string
+	imageUrl?: string | null
+	authortId?: number | null
+}
+
+export const getPostById = async (id: number): Promise<IPost | null> => {
 	const post = await prisma.post.findUnique({
 		where: { id }
 	})

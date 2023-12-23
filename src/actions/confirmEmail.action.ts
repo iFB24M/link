@@ -8,21 +8,22 @@
  */
 'use server'
 
+import { exists } from '@/functions/exists'
 import { prisma } from '@/services/Prisma.service'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
 
-export const confirmEmail = async (formData: FormData) => {
+export const confirmEmail = async (formData: FormData): Promise<void> => {
 	const rawData = {
-		code: formData.get('code')! as string
+		code: exists(formData.get('code')) as string
 	}
 
 	if (cookies().get('confirm_code')?.value === rawData.code.trim()) {
 		await prisma.user.create({
 			data: {
-				email: cookies().get('temp_email')!.value,
-				password: cookies().get('temp_password')!.value,
-				username: cookies().get('temp_username')!.value
+				email: exists(cookies().get('temp_email')).value,
+				password: exists(cookies().get('temp_password')).value,
+				username: exists(cookies().get('temp_username')).value
 			}
 		})
 

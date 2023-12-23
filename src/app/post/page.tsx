@@ -2,11 +2,12 @@ import styles from './page.module.scss'
 import dynamic from 'next/dynamic'
 import { createPost } from '@/actions/createPost.action'
 import { getUser } from '@/services/Prisma/getUser'
+import type { ReactElement } from 'react'
 
 const Container = dynamic(() => import('@/components/Container/Container.component'))
 const SubmitButton = dynamic(() => import('@/components/SubmitButton/SubmitButton.component'))
 
-const Post = async () => {
+const Post = async (): Promise<ReactElement> => {
 	const user = await getUser()
 
 	const now = new Date()
@@ -32,7 +33,7 @@ const Post = async () => {
 
 						<details>
 							<summary>Форматирование</summary>
-							**<strong>жирный текст</strong>/** <br />
+							**<strong>жирный текст</strong>/ ** <br />
 							__<i>курсивный текст</i>/__ <br />
 							~~<del>зачеркнутый текст</del>/~~
 						</details>

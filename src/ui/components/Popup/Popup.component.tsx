@@ -12,7 +12,7 @@ export const PopupContext = createContext({
 const Popup = ({ className, ...props }: HTMLAttributes<HTMLDivElement>): ReactNode => {
 	const [popupClassList, setPopupClassList] = useState('')
 
-	const togglePopupClassList = () => {
+	const togglePopupClassList = (): void => {
 		popupClassList === '' ? setPopupClassList(styles.opened) : setPopupClassList('')
 	}
 

@@ -3,17 +3,23 @@ import dynamic from 'next/dynamic'
 import { getUser } from '@/services/Prisma/getUser'
 import { updatePost } from '@/actions/updatePost.action'
 import { getPostById } from '@/services/Prisma/post/getById'
+import type { ReactElement } from 'react'
 
 const Container = dynamic(() => import('@/components/Container/Container.component'))
 const SubmitButton = dynamic(() => import('@/components/SubmitButton/SubmitButton.component'))
 
-const Post = async ({ params }: { params: { id: string } }) => {
+const exists = <T,>(obj: T | undefined | null): T => {
+	if (obj !== null && typeof obj !== 'undefined') return obj
+	else return 0 as T
+}
+
+const Post = async ({ params }: { params: { id: string } }): Promise<ReactElement> => {
 	const post = await getPostById(+params.id)
 
 	const user = await getUser()
 
 	const now = post?.publishDate
-	const date = `${now?.getDate()}.${now?.getMonth()! + 1}.${now?.getFullYear()}`
+	const date = `${now?.getDate()}.${exists(now?.getMonth()) + 1}.${now?.getFullYear()}`
 
 	return (
 		<main className={styles.main}>
@@ -35,7 +41,7 @@ const Post = async ({ params }: { params: { id: string } }) => {
 						</div>
 						<details>
 							<summary>Форматирование</summary>
-							**<strong>жирный текст</strong>/** <br />
+							**<strong>жирный текст</strong>/&nbsp;** <br />
 							__<i>курсивный текст</i>/__ <br />
 							~~<del>зачеркнутый текст</del>/~~
 						</details>

@@ -14,9 +14,9 @@
  * значение undef, чтобы гарантировать, что он не будет включен в ответ.
  */
 import { prisma } from '@/services/Prisma.service'
-import { NextRequest } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-export const GET = async (request: NextRequest, { params }: { params: { username: string } }) => {
+export const GET = async (request: NextRequest, { params }: { params: { username: string } }): Promise<any> => {
 	console.log(params.username)
 
 	const user = await prisma.user.findUnique({
