@@ -28,6 +28,10 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 		content = content.replace(inside, `<del>${inside.split('~~').join('')}</del>`)
 	})
 
+	if (content.includes('<script') || content.includes('<style') || content.includes('<head')) {
+		content = `<span class="${styles.warning}">Этот пост создает угрозу работе сайта. Поэтому он был удален</span>`
+	}
+
 	return (
 		<div className={styles.post}>
 			<div className={styles.author}>
