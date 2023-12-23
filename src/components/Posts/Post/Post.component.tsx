@@ -37,6 +37,10 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 		content = `<span class="${styles.warning}">Этот пост создает угрозу работе сайта. Поэтому он был удален</span>`
 	}
 
+	if (content.length >= 5000) {
+		content = `<span class="${styles.warning}">Посты размером более 5000 символов создают угрозу работе сайта. Поэтому они не отображаются. Разбейте пост на несколько маленьких или удалите его</span>`
+	}
+
 	return (
 		<div className={styles.post}>
 			<div className={styles.author}>

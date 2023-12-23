@@ -48,6 +48,15 @@
 }
 
 .content {
+
+	&,
+	& * {
+		hyphens: auto;
+	}
+
+	text-wrap:wrap;
+	word-wrap:break-word;
+
 	strong {
 		font-weight: 500;
 	}
@@ -62,6 +71,7 @@
 }
 
 .warning {
+	// display: inline-block;
 	background-color: red;
 	color: #fff;
 	padding: 4px;
