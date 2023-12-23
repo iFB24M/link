@@ -8,6 +8,8 @@ export const createPost = async (formData: FormData) => {
 		content: formData.get('content')! as string
 	}
 
+	if (rawData.content.includes('<script>') || rawData.content.includes('<style>')) return
+
 	await prisma_createPost(rawData.content)
 	redirect('/profile')
 }

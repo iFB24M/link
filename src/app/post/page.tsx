@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react'
 import styles from './page.module.scss'
 import dynamic from 'next/dynamic'
 import { createPost } from '@/actions/createPost.action'

@@ -9,6 +9,8 @@ export const updatePost = async (formData: FormData) => {
 		id: +formData.get('id')! as number,
 	}
 
+	if (rawData.content.includes('<script>') || rawData.content.includes('<style>')) return
+
 	await prisma_updatePost(rawData.id, rawData.content)
 	redirect('/profile')
 }
