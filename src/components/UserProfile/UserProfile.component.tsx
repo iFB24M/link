@@ -10,6 +10,7 @@ import Body1 from '@/ui/components/Body1/Body1.component'
 import { subscribe } from '@/actions/subscribe.action'
 import ChangeBioPopup from '@/popups/ChangeBioPopup'
 import Button from '@/ui/components/Button/Button.component'
+import CopyButton from '../CopyButton/CopyButton.component'
 
 const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 	const user = await getUserByUsername(props.username)
@@ -45,6 +46,7 @@ const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 					</form>
 					<Button appearance="secondary" icon="chat" href={`/user/${user?.username}/messenger`}></Button>
 				</> : ''}
+				<CopyButton appearance="secondary" icon="share" text={`https://link.fb24m.ru/user/${user?.username}`}>Поделится</CopyButton>
 			</div>
 			<div className={styles.about}>
 				<Body1 className={styles.bio}>

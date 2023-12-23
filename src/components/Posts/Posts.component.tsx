@@ -9,7 +9,7 @@ const Posts = async (props: { posts: IPost[], controls?: boolean }): Promise<Rea
 	return (
 		<div className={styles.posts}>
 			{props.posts?.map((post) =>
-				<Post key={post.id} id={post.id} controls={props.controls} date={post?.publishDate} authorId={post.authorId!} content={post?.content.split('\r\n').join('<br>')} />
+				<Post key={post.id} id={post.id} controls={props.controls} publishDate={post?.publishDate} authorId={post.authorId!} content={post?.content.split('\r\n').join('<br>')} />
 			).reverse()}
 		</div>
 	)

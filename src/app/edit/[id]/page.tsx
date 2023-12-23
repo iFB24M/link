@@ -21,7 +21,7 @@ const Post = async ({ params }: { params: { id: string } }) => {
 				<form action={updatePost} className={styles.form}>
 					<input type="text" style={{ display: 'none' }} name="id" value={post?.id} />
 					<div className={styles.post}>
-						<textarea className={styles.textarea} name="content" id="" placeholder="Текст поста">{post?.content}</textarea>
+						<textarea className={styles.textarea} name="content" id="" placeholder="Текст поста">{post?.content.split('<br>').join('\n')}</textarea>
 					</div>
 					<div className={styles.sidebar}>
 						<div className={styles.sidebarBlock}>
@@ -33,6 +33,12 @@ const Post = async ({ params }: { params: { id: string } }) => {
 						<div className={styles.sidebarBlock}>
 							Дата публикации: {date}
 						</div>
+						<details>
+							<summary>Форматирование</summary>
+							**<strong>жирный текст</strong>/** <br />
+							__<i>курсивный текст</i>/__ <br />
+							~~<del>зачеркнутый текст</del>/~~
+						</details>
 						<SubmitButton className={styles.button} icon="update">Изменить</SubmitButton>
 					</div>
 				</form>

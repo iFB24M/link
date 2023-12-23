@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev -H 192.168.0.102",
+    "dev": "next dev --experimental-https",
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint"

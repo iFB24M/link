@@ -29,6 +29,13 @@ const Post = async () => {
 						<div className={styles.sidebarBlock}>
 							Дата публикации: {date}
 						</div>
+
+						<details>
+							<summary>Форматирование</summary>
+							**<strong>жирный текст</strong>/** <br />
+							__<i>курсивный текст</i>/__ <br />
+							~~<del>зачеркнутый текст</del>/~~
+						</details>
 						<SubmitButton className={styles.button} icon="post_add">Опубликовать</SubmitButton>
 					</div>
 				</form>

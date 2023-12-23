@@ -3,7 +3,9 @@ export interface PostProps {
 	authorAvatarUrl?: string
 	imageUrl?: string
 	content: string
-	date?: Date | null
+	publishDate?: Date | null
 	controls?: boolean
 	id: number
+	full?: boolean
+	title?: string
 }

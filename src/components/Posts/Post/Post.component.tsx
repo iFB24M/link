@@ -1,45 +1,32 @@
 import type { ReactElement } from 'react'
 import styles from './Post.module.scss'
 import type { PostProps } from './Post.props'
-import Button from '@/ui/components/Button/Button.component'
 import Link from 'next/link'
 import { getUserById } from '@/services/Prisma/getUserById'
-import ActionButton from '@/components/ActionButton/ActionButton.component'
 import { deletePost } from '@/actions/deletePost.action'
+import dynamic from 'next/dynamic'
+import { formatContent } from './formatContent'
+import { formatDate } from './formatDate'
 
-const months = [
-	'янв', 'фев', 'мар', 'апр', 'мая', 'июн', 'июл', 'авг', 'сен', 'окт', 'нояб', 'дек'
-]
+const ActionButton = dynamic(() => import('@/components/ActionButton/ActionButton.component'))
+const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
 
 const Post = async (props: PostProps): Promise<ReactElement> => {
 	const user = await getUserById(props.authorId)
 
-	let content = props.content
-
-	const publishDate = props.date
-
-	const date = `${props.date?.getDate()} ${months[props.date?.getMonth()!]} ${props.date?.getFullYear()}`
-	const time = `${props.date?.getHours()! + 3}:${props.date?.getMinutes() && props.date?.getMinutes() <= 9 ? `0${props.date?.getMinutes()}` : props.date?.getMinutes()}`
-
-	props.content.match(/\*\*[а-яA-Яa-zA-Z0-9!"№;%:?()_+@#$^&-= ]+\*\*/gm)?.forEach((inside) => {
-		content = content.replace(inside, `<strong>${inside.split('**').join('')}</strong>`)
-	})
-
-	props.content.match(/__[а-яA-Яa-zA-Z0-9!"№;%:?*()+@#$^&-= ]+__/gm)?.forEach((inside) => {
-		content = content.replace(inside, `<i>${inside.split('__').join('')}</i>`)
-	})
-
-	props.content.match(/~~[а-яA-Яa-zA-Z0-9!"№;%:?*()_+@#$^&-= ]+~~/gm)?.forEach((inside) => {
-		content = content.replace(inside, `<del>${inside.split('~~').join('')}</del>`)
-	})
+	let content = formatContent(props.content)
 
 	if (content.includes('<script') || content.includes('<style') || content.includes('<head')) {
 		content = `<span class="${styles.warning}">Этот пост создает угрозу работе сайта. Поэтому он был удален</span>`
 	}
 
-	if (content.length >= 5000) {
-		content = `<span class="${styles.warning}">Посты размером более 5000 символов создают угрозу работе сайта. Поэтому они не отображаются. Разбейте пост на несколько маленьких или удалите его</span>`
+	if (content.length >= 1000 && !props.full) {
+		content = content.substring(0, 1000) + '...'
 	}
+
+	content = content.split('style="').join('data-style="')
+
+	console.log(props)
 
 	return (
 		<div className={styles.post}>
@@ -47,9 +34,7 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 				<div className={styles.avatar}></div>
 				<div className={styles.userdata}>
 					<Link href={`/user/${user?.username}`} className={styles.name}>{user?.username}</Link>
-					<span className={styles.date}>
-						{publishDate ? `${date} ${time}` : '1 янв 1970 00:00'}
-					</span>
+					<span className={styles.date}>{formatDate(props.publishDate)}</span>
 				</div>
 				{props.controls ?
 					<div className={styles.actions}>
@@ -58,7 +43,9 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 					</div> : ''}
 			</div>
 			<div className={styles.content} dangerouslySetInnerHTML={{ __html: content }}></div>
-		</div >
+			{content.length >= 1000 && !props.full &&
+				<Link href={`/article/${props.id}`}>Читать далее</Link>}
+		</div>
 	)
 }
 
