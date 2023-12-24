@@ -25,7 +25,7 @@ export const Comments = async ({ postId }: { postId: number }): Promise<ReactEle
 				</form>
 			</Card>
 			<div className={styles.comments}>
-				{comments.map((comment) => <Comment key={comment.id} comment={comment as IComment} />).toReversed()}
+				{comments?.map((comment) => <Comment key={comment.id} comment={comment as IComment} />).toReversed()}
 			</div>
 		</>
 	)
