@@ -1,7 +1,11 @@
 export interface IPost {
+	publishDate?: Date | null
 	id: number
+	title: string
 	content: string
-	authorId?: number
-	publishDate?: Date
-	likes?: number
+	imageUrl?: string | null
+	authorId?: number | null
+	deleted?: boolean | null
+	likes?: number | null
+	liked?: string | null
 }

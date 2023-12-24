@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
-import styles from './Textarea.module.scss'
 import type { TextareaProps } from './Textarea.props'
+import styles from '@/ui/scss/Input.module.scss'
 
 const Textarea = (props: TextareaProps): ReactNode => {
 	return (

@@ -12,6 +12,7 @@ import { restorePost } from '@/actions/restorePost'
 
 const ActionButton = dynamic(() => import('@/components/ActionButton/ActionButton.component'))
 const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
+const Card = dynamic(() => import('@/ui/components/Card/Card.component'))
 
 const Post = async (props: PostProps): Promise<ReactElement> => {
 	const author = await getUserById(props.authorId)
@@ -29,7 +30,7 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 	content = content.split('style="').join('data-style="')
 
 	return (
-		<div className={styles.post}>
+		<Card className={styles.post}>
 			<div className={styles.author}>
 				<div className={styles.avatar}></div>
 				<div className={styles.userdata}>
@@ -48,7 +49,7 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 			<div className={styles.content} dangerouslySetInnerHTML={{ __html: content }}></div>
 			{content.length >= 1000 && props.full !== true &&
 				<Link className={styles.readMore} href={`/article/${props.id}`}>Читать далее</Link>}
-		</div>
+		</Card>
 	)
 }
 

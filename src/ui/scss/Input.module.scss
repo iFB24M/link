@@ -1,4 +1,5 @@
-.input {
+.input,
+.textarea {
 	padding: 8px;
 	outline: 0;
 	width: 100%;
@@ -30,7 +31,8 @@
 		border-radius: 0;
 	}
 
-	&:has(input:focus)::before {
+	&:has(input:focus)::before,
+	&:has(textarea:focus)::before {
 		width: 100%;
 		left: 0;
 		border-radius: 8px;

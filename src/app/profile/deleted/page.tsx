@@ -1,10 +1,9 @@
 import dynamic from 'next/dynamic'
 import type { ReactElement } from 'react'
 
-import styles from './page.module.scss'
+import styles from '../page.module.scss'
 import { getUser } from '@/services/Prisma/getUser'
 import { Box } from '@/ui/components/Box/Box.component'
-import type { IPost } from '@/interfaces/IPost.interface'
 import { exists } from '@/functions/exists'
 import { getDeletedPostsByAuthorId } from '@/services/Prisma/getDeletedPostsByAuthorId'
 
@@ -18,13 +17,13 @@ const Welcome = async (): Promise<ReactElement> => {
 	const posts = await getDeletedPostsByAuthorId([exists(user?.id)])
 
 	return (
-		<Container className={styles.container}>
+		<Container>
 			<UserProfile selfProfile username={exists(user?.username)} />
-			<Box direction="row" alignItems="start" gap={8}>
+			<Box direction="row" alignItems="start" gap={8} className={styles.box}>
 				<Button icon="arrow_back" appearance="transparent" href="/profile">Назад в профиль</Button>
-				<Button appearance="primary" icon="add_circle" className={styles.addPostButton} href="/post">Новый пост</Button>
+				<Button appearance="primary" icon="add_circle" href="/post">Новый пост</Button>
 			</Box>
-			<Posts restore controls posts={posts as IPost[]} />
+			<Posts restore controls posts={posts} />
 		</Container>
 	)
 }

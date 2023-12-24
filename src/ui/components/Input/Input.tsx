@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import type { InputProps } from './Input.props'
-import styles from './Input.module.scss'
+import styles from '@/ui/scss/Input.module.scss'
 
 const Input = ({ className, ...props }: InputProps): ReactNode => {
 	return (
