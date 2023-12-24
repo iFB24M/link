@@ -8,4 +8,5 @@ export interface PostProps {
 	id: number
 	full?: boolean
 	title?: string
+	restore?: boolean
 }

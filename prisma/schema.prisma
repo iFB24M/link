@@ -29,6 +29,7 @@ model Post {
   content     String    @db.LongText
   imageUrl    String?
   authorId    Int?      @default(0)
+  deleted     Boolean?  @default(false)
 }
 
 model Message {

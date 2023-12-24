@@ -3,11 +3,12 @@ import styles from './Post.module.scss'
 import type { PostProps } from './Post.props'
 import Link from 'next/link'
 import { getUserById } from '@/services/Prisma/getUserById'
-import { deletePost } from '@/actions/deletePost.action'
 import dynamic from 'next/dynamic'
 import { formatContent } from './formatContent'
 import { formatDate } from './formatDate'
 import { exists } from '@/functions/exists'
+import { movePostToDeleted } from '@/actions/movePostToDeleted.action'
+import { restorePost } from '@/actions/restorePost'
 
 const ActionButton = dynamic(() => import('@/components/ActionButton/ActionButton.component'))
 const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
@@ -38,7 +39,9 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 				{exists(props.controls) || props.controls === true
 					? <div className={styles.actions}>
 						<Button appearance="transparent" icon="edit" href={`/edit/${props.id}`}></Button>
-						<ActionButton appearance="transparent" icon="delete" fields={[{ name: 'post-id', value: `${props.id}` }]} action={deletePost}></ActionButton>
+						{props.restore !== true
+							? <ActionButton appearance="transparent" icon="delete" fields={[{ name: 'post-id', value: `${props.id}` }]} action={movePostToDeleted}></ActionButton>
+							: <ActionButton appearance="primary" icon="restore_from_trash" fields={[{ name: 'post-id', value: `${props.id}` }]} action={restorePost}></ActionButton>}
 					</div>
 					: ''}
 			</div>
