@@ -1,6 +1,6 @@
 {
   "name": "next-link",
-  "version": "0.3.0-beta10",
+  "version": "0.3.0-beta12",
   "private": true,
   "scripts": {
     "dev": "next dev",
