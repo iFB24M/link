@@ -38,8 +38,8 @@ const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 				</div>
 			</div>
 			<div className={styles.username}>
-				{user?.username} <span className={styles.badge}>{user?.badge}</span>
-				{props.selfProfile === false
+				{user?.username} {user?.badge !== null ? <span className={styles.badge}>{user?.badge}</span> : ''}
+				{props.selfProfile !== true
 					? <><form action={subscribe}>
 						<input type="text" name="channel-id" readOnly className={styles.channelId} value={user?.id} />
 						<SubmitButton>

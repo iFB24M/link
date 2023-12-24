@@ -60,6 +60,16 @@
 	strong {
 		font-weight: 500;
 	}
+
+	a {
+		text-decoration: underline;
+
+		&:hover {
+			color: #000;
+		}
+
+		// color: #0000ff;
+	}
 }
 
 .badge {
@@ -76,4 +86,9 @@
 	color: #fff;
 	padding: 4px;
 	border-radius: 8px;
+}
+
+.readMore {
+	font-weight: 500;
+	margin-top: -4px;
 }

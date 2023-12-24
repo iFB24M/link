@@ -1,6 +1,5 @@
 'use server'
 
-import { exists } from '@/functions/exists'
 import { prisma } from '../Prisma.service'
 
 interface IPost {
@@ -12,15 +11,14 @@ interface IPost {
 	authortId?: number | null
 }
 
-export const getPostsByAuthorId = async (id: number[], maxPosts: number | false = false): Promise<IPost[]> => {
+export const getPostsByAuthorId = async (id: number[], maxPosts: number = 100): Promise<IPost[]> => {
 	const posts: IPost[] = await prisma.post.findMany({
 		where: {
 			authorId: {
 				in: id
 			},
 			deleted: false
-		},
-		take: exists(maxPosts) === 0 ? +exists(maxPosts) : 100
+		}
 	})
 
 	return posts
