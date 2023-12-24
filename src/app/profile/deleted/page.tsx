@@ -3,15 +3,15 @@ import type { ReactElement } from 'react'
 
 import styles from './page.module.scss'
 import { getUser } from '@/services/Prisma/getUser'
-import Posts from '@/components/Posts/Posts.component'
 import { Box } from '@/ui/components/Box/Box.component'
 import type { IPost } from '@/interfaces/IPost.interface'
-import UserProfile from '@/components/UserProfile/UserProfile.component'
 import { exists } from '@/functions/exists'
 import { getDeletedPostsByAuthorId } from '@/services/Prisma/getDeletedPostsByAuthorId'
 
 const Container = dynamic(() => import('@/components/Container/Container.component'))
 const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
+const Posts = dynamic(() => import('@/components/Posts/Posts.component'))
+const UserProfile = dynamic(() => import('@/components/UserProfile/UserProfile.component'))
 
 const Welcome = async (): Promise<ReactElement> => {
 	const user = await getUser()

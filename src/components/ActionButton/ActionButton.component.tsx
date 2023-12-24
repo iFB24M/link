@@ -1,7 +1,9 @@
 import type { ReactNode } from 'react'
 import styles from './ActionButton.module.scss'
 import type { ActionButtonProps } from './ActionButton.props'
-import Button from '@/ui/components/Button/Button.component'
+import dynamic from 'next/dynamic'
+
+const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
 
 const ActionButton = ({ action, fields, ...props }: ActionButtonProps): ReactNode => {
 	return (

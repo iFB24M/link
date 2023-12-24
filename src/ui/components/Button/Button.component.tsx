@@ -5,6 +5,7 @@ import styles from './Button.module.scss'
 import type { ButtonProps } from './Button.props'
 import Icon from '../Icon/Icon.component'
 import { exists } from '@/functions/exists'
+import Link from 'next/link'
 
 const Button = ({ appearance, className, href, icon, children, ...props }: ButtonProps): ReactNode => {
 	const defaultProps = {
@@ -14,7 +15,7 @@ const Button = ({ appearance, className, href, icon, children, ...props }: Butto
 	}
 
 	if (typeof href !== 'undefined') {
-		return <a href={href} {...defaultProps}></a>
+		return <Link prefetch={false} href={href} {...defaultProps}></Link>
 	} else {
 		return <button {...defaultProps}></button>
 	}

@@ -8,7 +8,6 @@ import type { Metadata } from 'next'
 
 const Container = dynamic(() => import('@/components/Container/Container.component'))
 const Input = dynamic(() => import('@/ui/components/Input/Input'))
-// const Box = dynamic(() => import('@/ui/components/Box/Box.component'))
 const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
 const SubmitButton = dynamic(() => import('@/components/SubmitButton/SubmitButton.component'))
 const Title1 = dynamic(() => import('@/ui/components/Title1/Title1.component'))

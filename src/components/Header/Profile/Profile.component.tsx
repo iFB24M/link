@@ -1,7 +1,9 @@
 import type { ReactElement } from 'react'
 import styles from './Profile.module.scss'
 import { getUser } from '@/services/Prisma/getUser'
-import Button from '@/ui/components/Button/Button.component'
+import dynamic from 'next/dynamic'
+
+const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
 
 const Profile = async (): Promise<ReactElement> => {
 	const user = await getUser(false)

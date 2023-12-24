@@ -9,16 +9,12 @@ import { formatDate } from './formatDate'
 import { exists } from '@/functions/exists'
 import { movePostToDeleted } from '@/actions/movePostToDeleted.action'
 import { restorePost } from '@/actions/restorePost'
-import { toggleLike } from '@/actions/toggleLike.action'
-import { checkLike } from '@/services/Prisma/post/checkLike'
-import { getUser } from '@/services/Prisma/getUser'
 
 const ActionButton = dynamic(() => import('@/components/ActionButton/ActionButton.component'))
 const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
 
 const Post = async (props: PostProps): Promise<ReactElement> => {
 	const author = await getUserById(props.authorId)
-	const user = await getUser()
 
 	let content = formatContent(props.content)
 
@@ -31,8 +27,6 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 	}
 
 	content = content.split('style="').join('data-style="')
-
-	const liked = await checkLike(exists(user?.id), props.id)
 
 	return (
 		<div className={styles.post}>
@@ -54,17 +48,6 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 			<div className={styles.content} dangerouslySetInnerHTML={{ __html: content }}></div>
 			{content.length >= 1000 && props.full !== true &&
 				<Link className={styles.readMore} href={`/article/${props.id}`}>Читать далее</Link>}
-			<div className={styles.interaction}>
-				<ActionButton
-					action={toggleLike}
-					fields={[
-						{ name: 'post-id', value: `${props.id}` },
-						{ name: 'user-id', value: `${user?.id}` }
-					]}
-					icon="thumb_up"
-					appearance={liked ? 'primary' : 'secondary'}
-				>{props.likes}</ActionButton>
-			</div>
 		</div>
 	)
 }

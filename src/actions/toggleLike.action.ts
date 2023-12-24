@@ -14,19 +14,25 @@ export const toggleLike = async (formData: FormData): Promise<void> => {
 	const post = await getPostById(rawData.postId)
 	const user = await getUser()
 
+	// если в списке людей, которые лайкнули пост, нашелся активный пользователь
 	if (post?.liked?.includes(`/${user?.id}/`) === true) {
+		// обновляем пост
 		await prisma.post.update({
 			where: { id: post.id },
 			data: {
-				liked: post?.liked?.split(`/${user?.id}/`).join(''),
+				// убираем активного пользователя из списка людей, которые лайкнули пост
+				liked: post?.liked?.replace(`/${user?.id}/`, ''),
+				// вычитаем один лайк
 				likes: exists(post.likes) - 1
 			}
-		})
+		}) // иначе
 	} else {
 		await prisma.post.update({
 			where: { id: post?.id },
 			data: {
-				liked: post?.liked + (`/${user?.id}/`),
+				// добавляем активного пользователя в список людей, которые лайкнули пост
+				liked: `${post?.liked}/${user?.id}/`,
+				// добавляем лайн
 				likes: +exists(post?.liked) + 1
 			}
 		})

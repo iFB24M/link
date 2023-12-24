@@ -27,6 +27,11 @@ module.exports = {
     "plugins": [
         "react"
     ],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
     "rules": {
         "no-tabs": "off",
         "@typescript-eslint/indent": 'off',

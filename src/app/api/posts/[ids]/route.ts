@@ -15,6 +15,7 @@
 import { prisma } from '@/services/Prisma.service'
 import type { NextRequest } from 'next/server'
 
+// TODO: Fix typization
 export const GET = async (request: NextRequest, { params }: { params: { ids: string } }): Promise<any> => {
 	const idsArray = params.ids.split(',').map(item => +item)
 

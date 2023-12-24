@@ -2,12 +2,12 @@ import type { ReactElement } from 'react'
 import styles from './page.module.scss'
 import { getUser } from '@/services/Prisma/getUser'
 import { getPostsByAuthorId } from '@/services/Prisma/getPostsByAuthorId'
-import Container from '@/components/Container/Container.component'
 import dynamic from 'next/dynamic'
 import type { IPost } from '@/interfaces/IPost.interface'
 import { exists } from '../functions/exists'
 
 const Posts = dynamic(() => import('@/components/Posts/Posts.component'))
+const Container = dynamic(() => import('@/components/Container/Container.component'))
 
 const Home = async (): Promise<ReactElement> => {
   const user = await getUser()
@@ -18,9 +18,7 @@ const Home = async (): Promise<ReactElement> => {
 
   return (
     <Container className={styles.posts}>
-
       <Posts posts={posts as IPost[]} />
-      <a href="/profile">Перейти в профиль</a>
     </Container>
   )
 }

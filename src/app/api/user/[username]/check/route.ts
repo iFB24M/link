@@ -1,8 +1,10 @@
 import { prisma } from '@/services/Prisma.service'
 import type { NextRequest } from 'next/server'
 
+// TODO: move function to new file
 const not = <T>(obj: T): boolean => typeof obj !== 'undefined' || obj !== null
 
+// TODO: Fix typization
 export const GET = async (request: NextRequest, { params }: { params: { username: string } }): Promise<any> => {
 	const searchParams = new URL(request.url).searchParams
 	const gettedPassword = searchParams.get('password')

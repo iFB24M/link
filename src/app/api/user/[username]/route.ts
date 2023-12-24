@@ -16,9 +16,8 @@
 import { prisma } from '@/services/Prisma.service'
 import type { NextRequest } from 'next/server'
 
+// TODO: Fix typization
 export const GET = async (request: NextRequest, { params }: { params: { username: string } }): Promise<any> => {
-	console.log(params.username)
-
 	const user = await prisma.user.findUnique({
 		where: { username: params.username }
 	})
