@@ -35,7 +35,7 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 					<Link href={`/user/${user?.username}`} className={styles.name}>{user?.username}</Link>
 					<span className={styles.date}>{formatDate(props.publishDate)}</span>
 				</div>
-				{!exists(props.controls) || props.controls === false
+				{exists(props.controls) || props.controls === true
 					? <div className={styles.actions}>
 						<Button appearance="transparent" icon="edit" href={`/edit/${props.id}`}></Button>
 						<ActionButton appearance="transparent" icon="delete" fields={[{ name: 'post-id', value: `${props.id}` }]} action={deletePost}></ActionButton>
