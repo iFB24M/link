@@ -43,7 +43,7 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 					: ''}
 			</div>
 			<div className={styles.content} dangerouslySetInnerHTML={{ __html: content }}></div>
-			{content.length >= 1000 && props.full === false &&
+			{content.length >= 1000 && props.full !== true &&
 				<Link href={`/article/${props.id}`}>Читать далее</Link>}
 		</div>
 	)
