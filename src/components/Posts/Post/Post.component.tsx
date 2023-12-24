@@ -52,10 +52,13 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 				</div>
 				<div className={styles.content} dangerouslySetInnerHTML={{ __html: content }}></div>
 				{content.length >= 1000 && props.full !== true &&
-					<Link className={styles.readMore} href={`/article/${props.id}`}>Читать далее</Link>}
-				<div className={styles.interaction}>
+					<Link className={styles.readMore} href={`/article/${props.id}`}>Читать далее</Link>
+				}
+
+				{props.full !== true && <div className={styles.interaction}>
 					<Button icon="chat" appearance="secondary" href={`/article/${props.id}#comments`}>Комментарии ({comments.length})</Button>
 				</div>
+				}
 			</Card>
 			{props.full === true &&
 				<Comments postId={props.id} />
