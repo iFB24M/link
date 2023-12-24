@@ -9,4 +9,5 @@ export interface PostProps {
 	full?: boolean
 	title?: string
 	restore?: boolean
+	likes?: number
 }

@@ -3,4 +3,5 @@ export interface IPost {
 	content: string
 	authorId?: number
 	publishDate?: Date
+	likes?: number
 }

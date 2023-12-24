@@ -9,6 +9,8 @@ interface IPost {
 	title: string
 	imageUrl?: string | null
 	authortId?: number | null
+	likes?: number | null
+	liked?: string | null
 }
 
 export const getPostById = async (id: number): Promise<IPost | null> => {

@@ -1,9 +1,10 @@
-import type { ReactNode } from 'react'
+// 'use client'
+
+import { type ReactNode } from 'react'
 import styles from './Header.module.scss'
 import Container from '../Container/Container.component'
-import Logo from '../Logo/Logo.component'
-import Profile from './Profile/Profile.component'
 import Link from 'next/link'
+import MainHeader from './MainHeader/MainHeader.component'
 
 const Header = (): ReactNode => {
 	return (
@@ -15,17 +16,8 @@ const Header = (): ReactNode => {
 						fb24m | Pet
 					</Link>
 				</Container>
-			</div >
-			<div className={styles.header}>
-				<Container className={styles.container}>
-					<Logo />
-					<ul className={styles.menu}>
-						<li className={styles.menuItem}><Link href="/post" className={styles.link}>Новый пост</Link></li>
-						<li className={styles.menuItem}><Link href="/messenger" className={styles.link}>Сообщения</Link></li>
-					</ul>
-					<Profile />
-				</Container>
 			</div>
+			<MainHeader />
 		</>
 	)
 }

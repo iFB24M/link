@@ -7,6 +7,7 @@
 }
 
 .header .container {
+	transition: padding .3s;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -18,37 +19,14 @@
 	}
 }
 
+.header .scroll .container {
+	padding-block: 8px;
+}
+
 .menu {
 	display: flex;
 	gap: 4px 16px;
 	justify-content: center;
 	// font-weight: w;
 	flex-wrap: wrap;
-}
-
-.fb24m {
-	display: flex;
-	align-items: center;
-	gap: 12px;
-	font-weight: 700;
-	font-size: 28px;
-}
-
-.subheader {
-	background-color: #000;
-	color: #fff;
-
-	border-radius: 0 0 8px 0;
-
-	.container {
-		display: flex;
-
-		@media (max-width: 560px) {
-			justify-content: center;
-		}
-	}
-}
-
-.logo {
-	max-width: 36px;
 }

@@ -1,3 +1,5 @@
+'use server'
+
 import dynamic from 'next/dynamic'
 import type { ReactElement } from 'react'
 

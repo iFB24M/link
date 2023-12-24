@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Montserrat } from 'next/font/google'
 import './globals.scss'
-import { Suspense, type ReactNode } from 'react'
+import { type ReactElement, type ReactNode } from 'react'
 import Header from '@/components/Header/Header.component'
 
 const montserrat = Montserrat({ preload: false, weight: ['300', '400', '500', '600', '700'], display: 'swap' })
@@ -15,14 +15,12 @@ export const metadata: Metadata = {
   }
 }
 
-const Layout = ({ children }: { children: ReactNode }): ReactNode => {
+const Layout = async ({ children }: { children: ReactNode }): Promise<ReactElement> => {
   return (
     <html lang="en">
       <body className={montserrat.className}>
         <Header />
-        <Suspense fallback={<>fdss</>}>
-          {children}
-        </Suspense>
+        {children}
       </body>
     </html>
   )

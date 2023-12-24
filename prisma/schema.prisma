@@ -30,6 +30,8 @@ model Post {
   imageUrl    String?
   authorId    Int?      @default(0)
   deleted     Boolean?  @default(false)
+  likes       Int?      @default(0)
+  liked       String?   @default("")
 }
 
 model Message {
