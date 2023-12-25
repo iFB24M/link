@@ -1,10 +1,11 @@
 import type { ReactNode } from 'react'
 import styles from './Icon.module.scss'
 import { iconFont } from '@/fonts'
+import type { IconProps } from './Icon.props'
 
-const Icon = ({ icon }: { icon: string }): ReactNode => {
+const Icon = ({ icon, className, ...props }: IconProps): ReactNode => {
 	return (
-		<i className={`${styles.icon} ${iconFont.className}`}>{icon}</i>
+		<i className={`${styles.icon} ${iconFont.className} ${className}`} {...props}>{icon}</i>
 	)
 }
 

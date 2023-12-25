@@ -8,6 +8,14 @@
 	display: flex;
 	gap: 8px;
 	align-items: stretch;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.button {
+	align-self: flex-end;
 }
 
 .card {

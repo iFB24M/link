@@ -38,18 +38,22 @@ const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 				</div>
 			</div>
 			<div className={styles.username}>
-				{user?.username} {user?.badge !== null ? <span className={styles.badge}>{user?.badge}</span> : ''}
-				{props.selfProfile !== true
-					? <><form action={subscribe}>
-						<input type="text" name="channel-id" readOnly className={styles.channelId} value={user?.id} />
-						<SubmitButton>
-							{await checkSubscription(exists(user?.id)) === false ? 'Отписаться' : 'Подписаться'}
-						</SubmitButton>
-					</form>
-						<Button appearance="secondary" icon="chat" href={`/user/${user?.username}/messenger`}></Button>
-					</>
-					: ''}
-				<CopyButton appearance="secondary" icon="share" text={`https://link.fb24m.ru/user/${user?.username}`}>Поделится</CopyButton>
+				<div className={styles.userInfo}>
+					{user?.username} {user?.badge !== null ? <span className={styles.badge}>{user?.badge}</span> : ''}
+				</div>
+				<div className={styles.buttons}>
+					{props.selfProfile !== true
+						? <><form action={subscribe}>
+							<input type="text" name="channel-id" readOnly className={styles.channelId} value={user?.id} />
+							<SubmitButton>
+								{await checkSubscription(exists(user?.id)) === true ? 'Отписаться' : 'Подписаться'}
+							</SubmitButton>
+						</form>
+							<Button appearance="secondary" icon="chat" href={`/user/${user?.username}/messenger`}></Button>
+						</>
+						: ''}
+					<CopyButton appearance="secondary" icon="share" text={`https://link.fb24m.ru/user/${user?.username}`}>Поделится</CopyButton>
+				</div>
 			</div>
 			<div className={styles.about}>
 				<Body1 className={styles.bio}>
