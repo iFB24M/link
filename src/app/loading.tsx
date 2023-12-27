@@ -3,12 +3,13 @@
 import type { ReactElement } from 'react'
 
 import { Spinner } from '@/ui/components/Spinner/Spinner.component'
+import { Container } from '@/components/Container/Container.component'
 
 const Loading = (): ReactElement => {
 	return (
-		<div>
-			<Spinner></Spinner>
-		</div>
+		<Container>
+			<Spinner stroke="var(--accent-color)"></Spinner>
+		</Container>
 	)
 }
 
