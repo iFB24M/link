@@ -17,7 +17,9 @@ interface IUser {
 }
 
 export const getUser = async (redirectAfter: boolean = true): Promise<IUser | undefined | null> => {
-	if (!cookies().has('link_saved_user') && redirectAfter) redirect('/login')
+	if (!cookies().has('link_saved_user') && redirectAfter) {
+		redirect('/login')
+	}
 
 	const savedData = {
 		email: cookies().get('link_saved_user')?.value.split(':')[0],

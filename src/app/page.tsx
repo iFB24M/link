@@ -9,15 +9,22 @@ import { Posts } from '@/components/Posts/Posts.component'
 import { Container } from '@/components/Container/Container.component'
 
 const Home = async (): Promise<ReactElement> => {
-  const user = await getUser()
-  const subsribedTo: number[] =
-    exists(user?.subscribedTo?.split(',').filter(item => exists(item) !== '' && !isNaN(+item)).map(item => +item))
+  const user = await getUser(false)
+  let posts: IPost[] = []
 
-  const posts = await getPostsByAuthorId(subsribedTo)
+  try {
+    const subsribedTo: number[] =
+      exists(user?.subscribedTo?.split(',').filter(item => exists(item) !== '' && !isNaN(+item)).map(item => +item))
+    posts = await getPostsByAuthorId(subsribedTo)
+  } catch {
+    console.log('user is not logged in')
+  }
 
   return (
     <Container className={styles.posts}>
-      <Posts posts={posts as IPost[]} />
+      {typeof user !== 'undefined'
+        ? <Posts posts={posts} />
+        : 'Войдите, чтобы просматривать посты своих друзей в ленте'}
     </Container>
   )
 }

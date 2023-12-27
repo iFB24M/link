@@ -3,7 +3,7 @@
 import { getUser } from './getUser'
 
 export const checkSubscription = async (channedId: number): Promise<boolean | undefined> => {
-	const user = await getUser()
+	const user = await getUser(false)
 
 	return user?.subscribedTo?.includes(`,${channedId},`)
 }

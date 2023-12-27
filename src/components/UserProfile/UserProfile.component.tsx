@@ -11,6 +11,7 @@ import { Button } from '@/ui/components/Button/Button.component'
 import { CopyButton } from '../CopyButton/CopyButton.component'
 import { Body1 } from '@/ui/components/Body1/Body1.component'
 import { ChangeBioPopup } from '@/popups/ChangeBioPopup'
+import { cookies } from 'next/headers'
 
 export const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 	const user = await getUserByUsername(props.username)
@@ -40,7 +41,7 @@ export const UserProfile = async (props: UserProfileProps): Promise<ReactElement
 					{user?.username} {user?.badge !== null ? <span className={styles.badge}>{user?.badge}</span> : ''}
 				</div>
 				<div className={styles.buttons}>
-					{props.selfProfile !== true
+					{props.selfProfile !== true && cookies().has('link_saved_user')
 						? <><form action={subscribe}>
 							<input type="text" name="channel-id" readOnly className={styles.channelId} value={user?.id} />
 							<SubmitButton>

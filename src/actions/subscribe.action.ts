@@ -10,7 +10,7 @@ import { revalidatePath } from 'next/cache'
 export const subscribe = async (formData: FormData): Promise<void> => {
 	const channelId = exists(formData.get('channel-id')) as string
 	const channel = await getUserById(+channelId)
-	const user = await getUser()
+	const user = await getUser(false)
 
 	if (await checkSubscription(+channelId) === true) {
 		await updateUser(exists(channel?.email), exists(channel?.password), {
