@@ -9,7 +9,7 @@ export const PopupContext = createContext({
 	wrapperClassName: ''
 })
 
-const Popup = ({ className, ...props }: HTMLAttributes<HTMLDivElement>): ReactNode => {
+export const Popup = ({ className, ...props }: HTMLAttributes<HTMLDivElement>): ReactNode => {
 	const [popupClassList, setPopupClassList] = useState('')
 
 	const togglePopupClassList = (): void => {
@@ -22,5 +22,3 @@ const Popup = ({ className, ...props }: HTMLAttributes<HTMLDivElement>): ReactNo
 		</PopupContext.Provider>
 	)
 }
-
-export default Popup

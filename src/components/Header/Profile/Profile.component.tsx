@@ -1,11 +1,9 @@
 import type { ReactElement } from 'react'
 import styles from './Profile.module.scss'
 import { getUser } from '@/services/Prisma/getUser'
-import dynamic from 'next/dynamic'
+import { Button } from '@/ui/components/Button/Button.component'
 
-const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
-
-const Profile = async (): Promise<ReactElement> => {
+export const Profile = async (): Promise<ReactElement> => {
 	const user = await getUser(false)
 
 	return (
@@ -14,5 +12,3 @@ const Profile = async (): Promise<ReactElement> => {
 		</Button>
 	)
 }
-
-export default Profile

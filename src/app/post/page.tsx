@@ -1,8 +1,7 @@
-import dynamic from 'next/dynamic'
+import { Editor } from '@/components/Editor/Editor.component'
 import type { ReactElement } from 'react'
-const Editor = dynamic(() => import('@/components/Editor/Editor.component'))
 
-const Post = async (): Promise<ReactElement> => {
+const Post = (): ReactElement => {
 	const now = new Date()
 
 	return (

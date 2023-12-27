@@ -30,18 +30,23 @@
 	}
 
 	ul {
-		li {
-			display: flex;
-			align-items: center;
-			gap: 8px;
+		display: inline-flex;
 
+		li {
 			&::before {
 				content: '';
-				display: block;
+				// display: inline-flex;
+				display: inline-block;
 				width: 4px;
 				height: 4px;
 				background-color: var(--accent-color);
 				border-radius: 8px;
+				margin-right: 8px;
+			}
+
+			& {
+				text-indent: -10px;
+				margin-left: 10px;
 			}
 		}
 	}
@@ -85,25 +90,35 @@
 	}
 
 	code {
-
-		// background-color: #eee;
-		border-radius: 4px;
-
 		font-size: 14px;
 		font-family: monospace;
-		// color: #fff;
-		padding: 4px 6px;
+	}
 
-		background-color: var(--accent-color);
-		color: #fff;
+	pre {
+		overflow-x: auto;
+		color: var(--foreground-color);
+		border: var(--medium-color) 1px solid;
+		border-radius: 4px;
+		display: inline-block;
+		padding: 10px;
 	}
 
 	pre code {
 		display: block;
-		padding: 8px;
+		// padding: 8px;
 		background-color: transparent;
-		color: var(--foreground-color);
-		border: var(--medium-color) 1px solid;
+	}
+
+	pre:not(:has(code)) {
+		display: inline-block;
+		width: auto;
+	}
+
+	p>code {
+		background-color: var(--accent-color);
+		color: var(--background-color);
+		border-radius: 4px;
+		padding: 4px 6px;
 	}
 
 	blockquote {

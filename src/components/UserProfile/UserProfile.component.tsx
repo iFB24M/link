@@ -6,15 +6,13 @@ import { getPostsByAuthorId } from '@/services/Prisma/getPostsByAuthorId'
 import { exists } from '@/functions/exists'
 import { checkSubscription } from '@/services/Prisma/checkSubscription'
 import { subscribe } from '@/actions/subscribe.action'
-import dynamic from 'next/dynamic'
+import { SubmitButton } from '../SubmitButton/SubmitButton.component'
+import { Button } from '@/ui/components/Button/Button.component'
+import { CopyButton } from '../CopyButton/CopyButton.component'
+import { Body1 } from '@/ui/components/Body1/Body1.component'
+import { ChangeBioPopup } from '@/popups/ChangeBioPopup'
 
-const ChangeBioPopup = dynamic(() => import('@/popups/ChangeBioPopup'))
-const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
-const CopyButton = dynamic(() => import('../CopyButton/CopyButton.component'))
-const SubmitButton = dynamic(() => import('../SubmitButton/SubmitButton.component'))
-const Body1 = dynamic(() => import('@/ui/components/Body1/Body1.component'))
-
-const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
+export const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 	const user = await getUserByUsername(props.username)
 	const posts = await getPostsByAuthorId([exists(user?.id)])
 
@@ -66,5 +64,3 @@ const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 		</div>
 	)
 }
-
-export default UserProfile

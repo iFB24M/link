@@ -1,18 +1,15 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-
 import type { CopyButtonProps } from './CopyButton.props'
 import { type ReactElement } from 'react'
 import { useCopyToClipboard } from '@/hooks/useCopyToClipboard'
+import { PopupWrapper } from '@/ui/components/PopupWrapper/PopupWrapper.component'
+import { Popup } from '@/ui/components/Popup/Popup.component'
+import { PopupFooter } from '@/ui/components/PopupFooter/PopupFooter.component'
+import { PopupTrigger } from '@/ui/components/PopupTrigger/PopupTrigger.component'
+import { Button } from '@/ui/components/Button/Button.component'
 
-const Popup = dynamic(() => import('@/ui/components/Popup/Popup.component'))
-const PopupWrapper = dynamic(() => import('@/ui/components/PopupWrapper/PopupWrapper.component'))
-const PopupFooter = dynamic(() => import('@/ui/components/PopupFooter/PopupFooter.component'))
-const PopupTrigger = dynamic(() => import('@/ui/components/PopupTrigger/PopupTrigger.component'))
-const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
-
-const CopyButton = ({ text, success, ...props }: CopyButtonProps): ReactElement => {
+export const CopyButton = ({ text, success, ...props }: CopyButtonProps): ReactElement => {
 	const copy = useCopyToClipboard(text)
 
 	return (
@@ -29,5 +26,3 @@ const CopyButton = ({ text, success, ...props }: CopyButtonProps): ReactElement 
 		</Popup>
 	)
 }
-
-export default CopyButton

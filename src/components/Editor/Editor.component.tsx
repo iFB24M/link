@@ -1,14 +1,12 @@
 import styles from './Editor.module.scss'
-import dynamic from 'next/dynamic'
 import { getUser } from '@/services/Prisma/getUser'
 import { updatePost } from '@/actions/updatePost.action'
 import type { ReactElement, ReactNode } from 'react'
 import type { IPost } from '@/interfaces/IPost.interface'
 import { createPost } from '../../actions/createPost.action'
 import { exists } from '@/functions/exists'
-
-const Container = dynamic(() => import('@/components/Container/Container.component'))
-const SubmitButton = dynamic(() => import('@/components/SubmitButton/SubmitButton.component'))
+import { Container } from '@/components/Container/Container.component'
+import { SubmitButton } from '@/components/SubmitButton/SubmitButton.component'
 
 export interface EditorProps {
 	post?: IPost
@@ -17,7 +15,7 @@ export interface EditorProps {
 	new?: boolean
 }
 
-const Editor = async (props: EditorProps): Promise<ReactElement> => {
+export const Editor = async (props: EditorProps): Promise<ReactElement> => {
 	const user = await getUser()
 
 	const now = typeof props.post?.publishDate !== 'undefined' ? props.post?.publishDate : props.publishDate
@@ -48,9 +46,9 @@ const Editor = async (props: EditorProps): Promise<ReactElement> => {
 					</div>
 					<details>
 						<summary>Форматирование</summary>
-						**<strong>жирный текст</strong>/&nbsp;** <br />
-						__<i>курсивный текст</i>/__ <br />
-						~~<del>зачеркнутый текст</del>/~~
+						**<strong>жирный текст</strong>** <br />
+						*<i>курсивный текст</i>* <br />
+						~~<del>зачеркнутый текст</del>~~
 					</details>
 					<SubmitButton className={styles.button} icon={props.new === true ? 'add_circle' : 'update'}>
 						{props.new === true ? 'Создать' : 'Изменить'}
@@ -60,5 +58,3 @@ const Editor = async (props: EditorProps): Promise<ReactElement> => {
 		</Container>
 	)
 }
-
-export default Editor

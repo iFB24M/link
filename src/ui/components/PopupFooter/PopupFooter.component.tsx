@@ -3,11 +3,9 @@
 import { useContext, type HTMLAttributes, type ReactNode } from 'react'
 import styles from './PopupFooter.module.scss'
 import { PopupContext } from '../Popup/Popup.component'
-import dynamic from 'next/dynamic'
+import { Button } from '../Button/Button.component'
 
-const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
-
-const PopupFooter = ({ className, children, ...props }: HTMLAttributes<HTMLDivElement>): ReactNode => {
+export const PopupFooter = ({ className, children, ...props }: HTMLAttributes<HTMLDivElement>): ReactNode => {
 	const popup = useContext(PopupContext)
 
 	return (
@@ -19,5 +17,3 @@ const PopupFooter = ({ className, children, ...props }: HTMLAttributes<HTMLDivEl
 		</div>
 	)
 }
-
-export default PopupFooter

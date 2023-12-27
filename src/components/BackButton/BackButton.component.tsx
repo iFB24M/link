@@ -1,13 +1,11 @@
 'use client'
 
+import { Button } from '@/ui/components/Button/Button.component'
 import type { ButtonProps } from '@/ui/components/Button/Button.props'
-import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 import type { ReactElement } from 'react'
 
-const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
-
-const BackButton = (props: ButtonProps): ReactElement => {
+export const BackButton = (props: ButtonProps): ReactElement => {
 	const router = useRouter()
 
 	return (
@@ -16,5 +14,3 @@ const BackButton = (props: ButtonProps): ReactElement => {
 		</div>
 	)
 }
-
-export default BackButton

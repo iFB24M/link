@@ -1,17 +1,15 @@
-import dynamic from 'next/dynamic'
 import type { ReactNode } from 'react'
 
 import styles from '@/scss/forms.module.scss'
 import { Box } from '@/ui/components/Box/Box.component'
 import { login } from '@/actions/login.action'
 import type { Metadata } from 'next'
-
-const Container = dynamic(() => import('@/components/Container/Container.component'))
-const Input = dynamic(() => import('@/ui/components/Input/Input'))
-const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
-const SubmitButton = dynamic(() => import('@/components/SubmitButton/SubmitButton.component'))
-const Title1 = dynamic(() => import('@/ui/components/Title1/Title1.component'))
-const Card = dynamic(() => import('@/ui/components/Card/Card.component'))
+import { Container } from '@/components/Container/Container.component'
+import { Card } from '@/ui/components/Card/Card.component'
+import { Title1 } from '@/ui/components/Title1/Title1.component'
+import { Input } from '@/ui/components/Input/Input'
+import { SubmitButton } from '@/components/SubmitButton/SubmitButton.component'
+import { Button } from '@/ui/components/Button/Button.component'
 
 export const metadata: Metadata = {
 	title: 'Вход - NextLink',

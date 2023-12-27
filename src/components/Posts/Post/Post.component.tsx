@@ -3,22 +3,23 @@ import styles from './Post.module.scss'
 import type { PostProps } from './Post.props'
 import Link from 'next/link'
 import { getUserById } from '@/services/Prisma/getUserById'
-import dynamic from 'next/dynamic'
 import { formatDate } from './formatDate'
 import { exists } from '@/functions/exists'
 import { movePostToDeleted } from '@/actions/movePostToDeleted.action'
 import { restorePost } from '@/actions/restorePost'
 import { Comments } from './Comments/Comments.component'
 import { prisma } from '@/services/Prisma.service'
-import CopyButton from '@/components/CopyButton/CopyButton.component'
 import { Box } from '@/ui/components/Box/Box.component'
 import { Markdown } from '@/components/Markdown/Markdown.component'
 
-const ActionButton = dynamic(() => import('@/components/ActionButton/ActionButton.component'))
-const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
-const Card = dynamic(() => import('@/ui/components/Card/Card.component'))
+import { ActionButton } from '@/components/ActionButton/ActionButton.component'
+import { Button } from '@/ui/components/Button/Button.component'
+import { Card } from '@/ui/components/Card/Card.component'
+import { CopyButton } from '@/components/CopyButton/CopyButton.component'
 
-const Post = async (props: PostProps): Promise<ReactElement> => {
+const maxContentLength = 250
+
+export const Post = async (props: PostProps): Promise<ReactElement> => {
 	const author = await getUserById(props.authorId)
 
 	// let content = props.content
@@ -29,11 +30,15 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 		content = `<span class="${styles.warning}">Этот пост создает угрозу работе сайта. Поэтому он был удален</span>`
 	}
 
-	if (content.length >= 500 && !exists(props.full)) {
-		content = content.substring(0, 500) + '...'
+	if (content.length >= maxContentLength && !exists(props.full)) {
+		content = content.substring(0, maxContentLength) + '...'
 	}
 
-	content = content.split('style="').join('data-style="')
+	if (content.includes('style=')) {
+		content = `<span class="${styles.warning}">
+		Запрещено использовать аттрибут style в постах!
+		</span>`
+	}
 
 	return (
 		<>
@@ -56,14 +61,14 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 				<Markdown>
 					{content}
 				</Markdown>
-				{content.length >= 500 && props.full !== true &&
+				{content.length >= maxContentLength && props.full !== true &&
 					<Link className={styles.readMore} href={`/article/${props.id}`}>Читать далее</Link>
 				}
 
 				{props.full !== true && <div className={styles.interaction}>
-					<Box gap={8} direction="row">
-						<Button icon="chat" appearance="secondary" href={`/article/${props.id}#comments`}>Комментарии ({comments.length})</Button>
-						<CopyButton success="Ссылка на пост скопирована" text={`https://link.fb24m.ru/article/${props.id}`} icon="share" appearance="secondary">Поделиться</CopyButton>
+					<Box gap={8} direction="row" className={styles.interactionButtons}>
+						<Button className={styles.interactionButton} icon="chat" appearance="secondary" href={`/article/${props.id}#comments`}>Комментарии ({comments.length})</Button>
+						<CopyButton className={styles.interactionButton} success="Ссылка на пост скопирована" text={`https://link.fb24m.ru/article/${props.id}`} icon="share" appearance="secondary">Поделиться</CopyButton>
 					</Box>
 				</div>
 				}
@@ -74,5 +79,3 @@ const Post = async (props: PostProps): Promise<ReactElement> => {
 		</>
 	)
 }
-
-export default Post

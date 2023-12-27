@@ -1,6 +1,5 @@
 'use server'
 
-import dynamic from 'next/dynamic'
 import type { ReactElement } from 'react'
 
 import { getUserByUsername } from '@/services/Prisma/getUserByUsername'
@@ -9,10 +8,9 @@ import { getPostsByAuthorId } from '@/services/Prisma/getPostsByAuthorId'
 
 import type { IPost } from '@/interfaces/IPost.interface'
 import type { Metadata } from 'next'
-
-const Container = dynamic(() => import('@/components/Container/Container.component'))
-const UserProfile = dynamic(() => import('@/components/UserProfile/UserProfile.component'))
-const Posts = dynamic(() => import('@/components/Posts/Posts.component'))
+import { Container } from '@/components/Container/Container.component'
+import { UserProfile } from '@/components/UserProfile/UserProfile.component'
+import { Posts } from '@/components/Posts/Posts.component'
 
 export const generateMetadata = async (props: { params: { username: string } }): Promise<Metadata> => {
 	const user = await getUserByUsername(props.params.username)

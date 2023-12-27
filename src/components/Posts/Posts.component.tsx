@@ -1,12 +1,11 @@
 import type { ReactElement } from 'react'
 import styles from './Posts.module.scss'
-import dynamic from 'next/dynamic'
 import type { IPost } from '@/interfaces/IPost.interface'
 import { exists } from '@/functions/exists'
 
-const Post = dynamic(() => import('./Post/Post.component'))
+import { Post } from './Post/Post.component'
 
-const Posts = async (props: { posts: IPost[], controls?: boolean, restore?: boolean }): Promise<ReactElement> => {
+export const Posts = async (props: { posts: IPost[], controls?: boolean, restore?: boolean }): Promise<ReactElement> => {
 	return (
 		<div className={styles.posts}>
 			{props.posts?.map((post) =>
@@ -15,5 +14,3 @@ const Posts = async (props: { posts: IPost[], controls?: boolean, restore?: bool
 		</div>
 	)
 }
-
-export default Posts

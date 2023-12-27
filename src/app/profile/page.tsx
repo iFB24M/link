@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic'
 import type { ReactElement } from 'react'
 import styles from './page.module.scss'
 
@@ -7,11 +6,10 @@ import { Box } from '@/ui/components/Box/Box.component'
 import { getPostsByAuthorId } from '@/services/Prisma/getPostsByAuthorId'
 import type { IPost } from '@/interfaces/IPost.interface'
 import { exists } from '@/functions/exists'
-
-const Container = dynamic(() => import('@/components/Container/Container.component'))
-const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
-const Posts = dynamic(() => import('@/components/Posts/Posts.component'))
-const UserProfile = dynamic(() => import('@/components/UserProfile/UserProfile.component'))
+import { UserProfile } from '@/components/UserProfile/UserProfile.component'
+import { Container } from '@/components/Container/Container.component'
+import { Button } from '@/ui/components/Button/Button.component'
+import { Posts } from '@/components/Posts/Posts.component'
 
 const Welcome = async (): Promise<ReactElement> => {
 	const user = await getUser()

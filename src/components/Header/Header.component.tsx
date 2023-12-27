@@ -3,13 +3,11 @@
 import { type ReactNode } from 'react'
 import styles from './Header.module.scss'
 import Link from 'next/link'
-import dynamic from 'next/dynamic'
 import Image from 'next/image'
+import { Container } from '../Container/Container.component'
+import { MainHeader } from './MainHeader/MainHeader.component'
 
-const Container = dynamic(() => import('../Container/Container.component'))
-const MainHeader = dynamic(() => import('./MainHeader/MainHeader.component'))
-
-const Header = (): ReactNode => {
+export const Header = (): ReactNode => {
 	return (
 		<>
 			<div className={styles.subheader}>
@@ -24,5 +22,3 @@ const Header = (): ReactNode => {
 		</>
 	)
 }
-
-export default Header

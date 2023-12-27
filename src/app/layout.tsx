@@ -3,9 +3,7 @@ import { Montserrat } from 'next/font/google'
 import './globals.scss'
 import { type ReactElement, type ReactNode } from 'react'
 
-import dynamic from 'next/dynamic'
-
-const Header = dynamic(() => import('@/components/Header/Header.component'))
+import { Header } from '@/components/Header/Header.component'
 
 const montserrat = Montserrat({ preload: false, weight: ['300', '400', '500', '600', '700'], display: 'swap' })
 

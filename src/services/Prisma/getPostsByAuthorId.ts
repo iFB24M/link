@@ -18,6 +18,10 @@ export const getPostsByAuthorId = async (id: number[], maxPosts: number = 100): 
 				in: id
 			},
 			deleted: false
+		},
+		take: 100,
+		orderBy: {
+			publishDate: 'asc'
 		}
 	})
 

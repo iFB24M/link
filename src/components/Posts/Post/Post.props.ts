@@ -1,13 +1,13 @@
 export interface PostProps {
 	authorId: number
-	authorAvatarUrl?: string
-	imageUrl?: string
+	authorAvatarUrl?: string | undefined
+	imageUrl?: string | undefined
 	content: string
-	publishDate?: Date | null
-	controls?: boolean
+	publishDate?: Date | null | undefined
+	controls?: boolean | undefined
 	id: number
-	full?: boolean
-	title?: string
-	restore?: boolean
-	likes?: number
+	full?: boolean | undefined
+	title?: string | undefined
+	restore?: boolean | undefined
+	likes?: number | undefined
 }

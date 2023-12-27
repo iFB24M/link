@@ -1,13 +1,13 @@
 import { addComment } from '@/actions/addComment.action'
-import SubmitButton from '@/components/SubmitButton/SubmitButton.component'
 import { prisma } from '@/services/Prisma.service'
-import Input from '@/ui/components/Input/Input'
 import type { ReactElement } from 'react'
 import { Comment } from './Comment/Comment.component'
 import type { IComment } from '@/interfaces/IComment.interface'
 import styles from './Comments.module.scss'
-import Card from '@/ui/components/Card/Card.component'
-import Title1 from '@/ui/components/Title1/Title1.component'
+import { Title1 } from '@/ui/components/Title1/Title1.component'
+import { Card } from '@/ui/components/Card/Card.component'
+import { Input } from '@/ui/components/Input/Input'
+import { SubmitButton } from '@/components/SubmitButton/SubmitButton.component'
 
 export const Comments = async ({ postId }: { postId: number }): Promise<ReactElement> => {
 	const comments = await prisma.comment.findMany({
