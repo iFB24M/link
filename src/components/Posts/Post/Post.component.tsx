@@ -17,7 +17,7 @@ import { Button } from '@/ui/components/Button/Button.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import { CopyButton } from '@/components/CopyButton/CopyButton.component'
 
-const maxContentLength = 250
+const maxContentLength = 500
 
 export const Post = async (props: PostProps): Promise<ReactElement> => {
 	const author = await getUserById(props.authorId)

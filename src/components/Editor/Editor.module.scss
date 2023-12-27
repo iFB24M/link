@@ -41,6 +41,7 @@
 }
 
 .textarea {
+	line-height: 150%;
 	height: 100%;
 	width: 100%;
 	border: 0;
@@ -55,4 +56,9 @@
 
 .button {
 	margin-top: 8px;
+}
+
+.instruction {
+	display: flex;
+	flex-direction: column;
 }
