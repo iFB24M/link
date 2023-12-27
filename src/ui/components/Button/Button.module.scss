@@ -64,6 +64,8 @@
 	}
 
 	&.transparent {
+		color: var(--accent-color);
+
 		&::before {
 			transition: opacity .3s;
 
