@@ -1,12 +1,18 @@
 'use client'
 
+import { Container } from '@/components/Container/Container.component'
+import { Markdown } from '@/components/Markdown/Markdown.component'
 import type { ReactNode } from 'react'
 
-const Error = (e: any): ReactNode => {
-	console.log(e)
+const Error = ({ error }: any): ReactNode => {
+	console.log(error)
 
 	return (
-		<div>Ошибка. Подробная информация выведена в консоль. Пожалуйста, сообщите об ошибке здесь: <a href="https://github.com/iFB24M/link/issues">https://github.com/iFB24M/link/issues</a>. Если ошибка срочная (например, не работает весь сайт), добавьте метку &quot;Срочное&quot;. Мы разбереся как можно быстрее</div>
+		<Container>
+			<Markdown>
+				{error.message}
+			</Markdown>
+		</Container>
 	)
 }
 

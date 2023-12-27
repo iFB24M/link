@@ -9,6 +9,10 @@ export const Markdown = ({ children }: { children: string }): ReactElement => {
 	const marked = useMarked(children)
 
 	return (
-		<div className={styles.markdown} dangerouslySetInnerHTML={{ __html: marked }}></div>
+		<div className={styles.markdown}
+			dangerouslySetInnerHTML={{
+				__html: marked.split('<table>').join('<div><table>')
+					.split('</table>').join('</div></table>')
+			}}></div>
 	)
 }

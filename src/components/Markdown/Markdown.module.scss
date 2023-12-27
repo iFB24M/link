@@ -5,6 +5,22 @@
 	word-wrap: break-word;
 	line-height: 150%;
 
+	div:has(table) {
+		overflow-x: auto;
+	}
+
+	th,
+	td {
+		padding-block: 8px;
+		border-bottom: var(--medium-color) 1px solid;
+		text-align: left;
+		padding-right: 16px;
+
+		&:first-child {
+			padding-left: 16px;
+		}
+	}
+
 	ol,
 	ul {
 		display: flex;
