@@ -1,9 +1,12 @@
+@import "@/scss/vars";
+
 .header {
 	border-bottom: var(--medium-color) 1px solid;
 	position: sticky;
 	top: 0;
 	background-color: #fff;
-	z-index: 10;
+	z-index: $fixed;
+
 }
 
 .header .container {

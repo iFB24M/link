@@ -52,7 +52,7 @@ const UserProfile = async (props: UserProfileProps): Promise<ReactElement> => {
 							<Button appearance="secondary" icon="chat" href={`/user/${user?.username}/messenger`}></Button>
 						</>
 						: ''}
-					<CopyButton appearance="secondary" icon="share" text={`https://link.fb24m.ru/user/${user?.username}`}>Поделится</CopyButton>
+					<CopyButton success="Ссылка на профиль ($0) скопирована" appearance="secondary" icon="share" text={`https://link.fb24m.ru/user/${user?.username}`}>Поделится</CopyButton>
 				</div>
 			</div>
 			<div className={styles.about}>

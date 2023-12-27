@@ -12,13 +12,13 @@ const PopupFooter = dynamic(() => import('@/ui/components/PopupFooter/PopupFoote
 const PopupTrigger = dynamic(() => import('@/ui/components/PopupTrigger/PopupTrigger.component'))
 const Button = dynamic(() => import('@/ui/components/Button/Button.component'))
 
-const CopyButton = ({ text, ...props }: CopyButtonProps): ReactElement => {
+const CopyButton = ({ text, success, ...props }: CopyButtonProps): ReactElement => {
 	const copy = useCopyToClipboard(text)
 
 	return (
 		<Popup>
 			<PopupWrapper>
-				Ссылка на профиль ({text}) скопирована
+				{success?.split('$0').join(text)}
 				<PopupFooter></PopupFooter>
 			</PopupWrapper>
 			<PopupTrigger>
