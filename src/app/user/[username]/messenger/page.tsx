@@ -1,12 +1,10 @@
 import styles from './page.module.scss'
 
-import type { IUser } from '@/interfaces/IUser.interface'
 import type { IDisplayMessage } from '@/components/Messenger/Messages/DisplayMessage.interface'
 import type { ReactElement } from 'react'
 
 import { addMessage } from '@/actions/addMessage.action'
 import { generateChatName } from '@/services/Prisma/generateChatName'
-import { getUser } from '@/services/Prisma/getUser'
 import { getMessages } from '@/services/Prisma/message/get'
 
 import { exists } from '@/functions/exists'
@@ -15,12 +13,13 @@ import { Messages } from '@/components/Messenger/Messages/Messages.component'
 import { Container } from '@/components/Container/Container.component'
 import { Input } from '@/ui/components/Input/Input'
 import { Button } from '@/ui/components/Button/Button.component'
+import { parseUser } from '@/functions/parseUser'
 
 const Messenger = async ({ params }: { params: { username: string } }): Promise<ReactElement> => {
 	/* Код извлекает информацию о пользователе, генерирует имя чата на основе предоставленного имени
 	пользователя и имени пользователя, а затем извлекает сообщения для этого чата. */
-	const user = await getUser()
-	const chatName = await generateChatName(params.username, exists(user?.username))
+	const user = await parseUser()
+	const chatName = await generateChatName(params.username, exists<string>(user?.username))
 	const messages = await getMessages(chatName)
 
 	/* Блок кода проверяет, выполняется ли код в среде браузера (на стороне клиента), проверяя, определен
@@ -43,7 +42,7 @@ const Messenger = async ({ params }: { params: { username: string } }): Promise<
 					</div>
 				</div>
 				<div className={styles.messenger}>
-					<Messages user={user as IUser} messages={messages as IDisplayMessage[]} />
+					<Messages user={user} messages={messages as IDisplayMessage[]} />
 					<form action={addMessage} className={styles.form}>
 						<Container className={styles.formContainer}>
 							<input style={{ display: 'none' }} readOnly value={params.username} name="companion-username" />

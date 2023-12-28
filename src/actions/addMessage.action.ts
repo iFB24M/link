@@ -1,11 +1,11 @@
 'use server'
 
-import { getUser } from '@/services/Prisma/getUser'
 import { getUserByUsername } from '@/services/Prisma/getUserByUsername'
 
 import { addMessage as prisma_addMessage } from '@/services/Prisma/message/add'
 import { revalidatePath } from 'next/cache'
 import { exists } from '../functions/exists'
+import { parseUser } from '@/functions/parseUser'
 
 export const addMessage = async (formData: FormData): Promise<void> => {
 	const rawData = {
@@ -14,7 +14,7 @@ export const addMessage = async (formData: FormData): Promise<void> => {
 	}
 
 	const companion = await getUserByUsername(rawData.companion)
-	const user = await getUser()
+	const user = await parseUser()
 
 	const chatName = exists(companion?.id) < exists(user?.id) ? `${companion?.id}+${user?.id}` : `${user?.id}+${companion?.id}`
 

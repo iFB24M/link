@@ -1,6 +1,9 @@
+import type { IUser } from '@/interfaces/IUser.interface'
+
 export interface UserProfileProps {
 	addPostButton?: boolean
 	subscribeButton?: boolean
 	selfProfile?: boolean
-	username: string
+	postsCount: number
+	user: IUser
 }

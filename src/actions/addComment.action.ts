@@ -1,8 +1,8 @@
 'use server'
 
 import { exists } from '@/functions/exists'
+import { parseUser } from '@/functions/parseUser'
 import { prisma } from '@/services/Prisma.service'
-import { getUser } from '@/services/Prisma/getUser'
 import { revalidatePath } from 'next/cache'
 
 export const addComment = async (formData: FormData): Promise<void> => {
@@ -11,7 +11,7 @@ export const addComment = async (formData: FormData): Promise<void> => {
 		post: exists(formData.get('post-id'))
 	}
 
-	const user = await getUser()
+	const user = await parseUser()
 
 	await prisma.comment.create({
 		data: {

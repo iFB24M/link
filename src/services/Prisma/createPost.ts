@@ -2,10 +2,10 @@
 
 import { exists } from '@/functions/exists'
 import { prisma } from '../Prisma.service'
-import { getUser } from './getUser'
+import { parseUser } from '@/functions/parseUser'
 
 export const createPost = async (content: string): Promise<void> => {
-	const author = await getUser()
+	const author = await parseUser()
 
 	await prisma.post.create({
 		data: {

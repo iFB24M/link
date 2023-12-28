@@ -1,10 +1,10 @@
 import type { ReactElement } from 'react'
 import styles from './Profile.module.scss'
-import { getUser } from '@/services/Prisma/getUser'
 import { Button } from '@/ui/components/Button/Button.component'
+import { parseUser } from '@/functions/parseUser'
 
 export const Profile = async (): Promise<ReactElement> => {
-	const user = await getUser(false)
+	const user = await parseUser()
 
 	return (
 		<Button appearance="transparent" icon="account_circle" href="/profile" className={styles.profile}>

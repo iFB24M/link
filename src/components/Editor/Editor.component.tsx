@@ -1,5 +1,4 @@
 import styles from './Editor.module.scss'
-import { getUser } from '@/services/Prisma/getUser'
 import { updatePost } from '@/actions/updatePost.action'
 import type { ReactElement, ReactNode } from 'react'
 import type { IPost } from '@/interfaces/IPost.interface'
@@ -8,6 +7,7 @@ import { exists } from '@/functions/exists'
 import { Container } from '@/components/Container/Container.component'
 import { SubmitButton } from '@/components/SubmitButton/SubmitButton.component'
 import Link from 'next/link'
+import { parseUser } from '@/functions/parseUser'
 
 export interface EditorProps {
 	post?: IPost
@@ -17,7 +17,7 @@ export interface EditorProps {
 }
 
 export const Editor = async (props: EditorProps): Promise<ReactElement> => {
-	const user = await getUser()
+	const user = await parseUser()
 
 	const now = typeof props.post?.publishDate !== 'undefined' ? props.post?.publishDate : props.publishDate
 	const date = `${now?.getDate()}.${exists(now?.getMonth()) + 1}.${now?.getFullYear()}`

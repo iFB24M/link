@@ -1,7 +1,7 @@
 'use server'
 
 import { exists } from '@/functions/exists'
-import { getUser } from '@/services/Prisma/getUser'
+import { parseUser } from '@/functions/parseUser'
 import { updateUser } from '@/services/Prisma/updateUser'
 import { revalidatePath } from 'next/cache'
 
@@ -10,7 +10,7 @@ export const updateBio = async (formData: FormData): Promise<void> => {
 		newBio: exists(formData.get('new-bio')) as string
 	}
 
-	const user = await getUser()
+	const user = await parseUser()
 
 	const email = user?.email !== null ? user?.email : ''
 	const password = user?.password !== null ? user?.password : ''
