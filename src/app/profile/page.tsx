@@ -2,7 +2,6 @@ import type { ReactElement } from 'react'
 import styles from './page.module.scss'
 
 import { Box } from '@/ui/components/Box/Box.component'
-import type { IPost } from '@/interfaces/IPost.interface'
 import { exists } from '@/functions/exists'
 import { UserProfile } from '@/components/UserProfile/UserProfile.component'
 import { Container } from '@/components/Container/Container.component'
@@ -22,7 +21,7 @@ const Welcome = async (): Promise<ReactElement> => {
 				<Button appearance="primary" icon="add_circle" href="/post">Новый пост</Button>
 				<Button appearance="secondary" icon="delete" href="/profile/deleted">Удаленные</Button>
 			</Box>
-			<Posts controls posts={posts as IPost[]} />
+			<Posts controls posts={posts} />
 		</Container>
 	)
 }
