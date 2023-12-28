@@ -1,9 +1,9 @@
 'use server'
 
-import { parseUser } from '@/functions/parseUser'
+import { getUser } from './getUser'
 
 export const checkSubscription = async (channedId: number): Promise<boolean | undefined> => {
-	const user = await parseUser(false)
+	const user = await getUser(false)
 
 	return user?.subscribedTo?.includes(`,${channedId},`)
 }

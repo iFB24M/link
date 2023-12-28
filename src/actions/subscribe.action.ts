@@ -4,13 +4,14 @@ import { exists } from '@/functions/exists'
 import { parseUser } from '@/functions/parseUser'
 import { checkSubscription } from '@/services/Prisma/checkSubscription'
 import { getUserById } from '@/services/Prisma/getUserById'
+import { revalidateSelf } from '@/services/Prisma/revalidateSelf'
 import { updateUser } from '@/services/Prisma/updateUser'
 import { revalidatePath } from 'next/cache'
 
 export const subscribe = async (formData: FormData): Promise<void> => {
 	const channelId = exists(formData.get('channel-id')) as string
 	const channel = await getUserById(+channelId)
-	const user = await parseUser(false)
+	const user = await parseUser()
 
 	if (await checkSubscription(+channelId) === true) {
 		await updateUser(exists(channel?.email), exists<string>(channel?.password), {
@@ -30,5 +31,6 @@ export const subscribe = async (formData: FormData): Promise<void> => {
 		})
 	}
 
+	await revalidateSelf()
 	revalidatePath('/user')
 }

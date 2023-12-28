@@ -5,7 +5,6 @@ import type { ReactElement } from 'react'
 import { getUserByUsername } from '@/services/Prisma/getUserByUsername'
 import { exists } from '@/functions/exists'
 
-import type { IPost } from '@/interfaces/IPost.interface'
 import type { Metadata } from 'next'
 import { Container } from '@/components/Container/Container.component'
 import { UserProfile } from '@/components/UserProfile/UserProfile.component'
@@ -33,7 +32,7 @@ const Welcome = async (props: { params: { username: string } }): Promise<ReactEl
 	return (
 		<Container>
 			<UserProfile user={user as IUser} postsCount={posts.length} />
-			<Posts posts={posts as IPost[]} />
+			<Posts posts={posts} />
 		</Container>
 	)
 }
