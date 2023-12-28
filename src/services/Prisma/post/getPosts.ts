@@ -1,15 +1,7 @@
 'use server'
 
+import type { IPost } from '@/interfaces/IPost.interface'
 import { prisma } from '../../Prisma.service'
-
-interface IPost {
-	publishDate?: Date | null
-	id: number
-	content: string
-	title: string
-	imageUrl?: string | null
-	authortId?: number | null
-}
 
 interface IPostWhere {
 	authorId?: number[]
