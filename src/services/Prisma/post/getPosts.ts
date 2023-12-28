@@ -20,7 +20,8 @@ export const getPosts = async (where: IPostWhere, maxPosts: number = 100): Promi
 	const posts: IPost[] = await prisma.post.findMany({
 		where: {
 			authorId: { in: where.authorId },
-			id: where.id
+			id: where.id,
+			deleted: false
 		},
 		take: 100,
 		orderBy: {
