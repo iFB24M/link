@@ -6,7 +6,7 @@ import type { IResponse } from '@/interfaces/IResponse.interface'
 
 interface IPostWhere {
 	authorId?: number[]
-	id?: number
+	id?: number[]
 }
 
 export const getPosts = async (where: IPostWhere, maxPosts: number = 100): Promise<IResponse<IPost[]>> => {
@@ -14,7 +14,9 @@ export const getPosts = async (where: IPostWhere, maxPosts: number = 100): Promi
 		const posts: IPost[] = await prisma.post.findMany({
 			where: {
 				authorId: { in: where.authorId },
-				id: where.id,
+				id: {
+					in: where.id
+				},
 				deleted: false
 			},
 			take: 100,
@@ -25,6 +27,6 @@ export const getPosts = async (where: IPostWhere, maxPosts: number = 100): Promi
 
 		return { ok: true, message: 'success', code: 200, data: posts }
 	} catch {
-		return { ok: false, message: 'user not found', code: 404 }
+		return { ok: false, message: 'posts not found', code: 404 }
 	}
 }

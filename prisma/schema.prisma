@@ -11,15 +11,16 @@ datasource db {
 }
 
 model User {
-  id           Int     @id @default(autoincrement())
-  avatar       String?
-  email        String  @unique
-  username     String  @unique
-  password     String
-  bio          String?
-  subscribedTo String?
-  subscribers  Int?
-  badge        String?
+  id            Int     @id @default(autoincrement())
+  avatar        String?
+  email         String  @unique
+  username      String  @unique
+  password      String
+  bio           String?
+  subscribedTo  String?
+  subscribers   Int?
+  badge         String?
+  savedArticles String?
 }
 
 model Comment {
@@ -42,6 +43,7 @@ model Post {
   likes       Int?      @default(0)
   liked       String?   @default("")
   comments    Comment[]
+  userId      Int?
 }
 
 model Message {

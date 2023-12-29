@@ -10,15 +10,13 @@ import { parseUser } from '@/functions/parseUser'
 
 const Home = async (): Promise<ReactElement> => {
   const user = await parseUser(false)
-  let posts: IPost[] = []
+  const subsribedTo: number[] =
+    exists(user?.data?.subscribedTo?.split(',').filter(item => exists(item) !== '' && !isNaN(+item)).map(item => +item))
+  const posts = exists<IPost[]>((await getPosts({ authorId: subsribedTo })).data)
 
-  try {
-    const subsribedTo: number[] =
-      exists(user?.data?.subscribedTo?.split(',').filter(item => exists(item) !== '' && !isNaN(+item)).map(item => +item))
-    posts = exists<IPost[]>((await getPosts({ authorId: subsribedTo })).data)
-  } catch {
-    console.log('user is not logged in')
-  }
+  console.log('posts', posts)
+
+  console.log(user)
 
   return (
     <Container className={styles.posts}>

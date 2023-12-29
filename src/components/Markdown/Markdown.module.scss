@@ -81,6 +81,9 @@
 	h4,
 	h5,
 	h6 {
+		line-height: 120%;
+		font-weight: 600;
+
 		&:not(:first-child) {
 			margin-top: -4px;
 		}

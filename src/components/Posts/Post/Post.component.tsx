@@ -16,6 +16,8 @@ import { Button } from '@/ui/components/Button/Button.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import { CopyButton } from '@/components/CopyButton/CopyButton.component'
 import { getUser } from '@/services/Prisma/getUser'
+import { saveArticle } from '@/actions/saveArticle.action'
+import { checkSavedPost } from '@/services/Prisma/post/checkSaved'
 
 const maxContentLength = 500
 
@@ -65,13 +67,22 @@ export const Post = async (props: PostProps): Promise<ReactElement> => {
 					<Link className={styles.readMore} href={`/article/${props.id}`}>Читать далее</Link>
 				}
 
-				{props.full !== true && <div className={styles.interaction}>
+				<div className={styles.interaction}>
 					<Box gap={8} direction="row" className={styles.interactionButtons}>
-						<Button className={styles.interactionButton} icon="chat" appearance="secondary" href={`/article/${props.id}#comments`}>Комментарии ({comments.length})</Button>
+						{props.full !== true &&
+							<Button className={styles.interactionButton} icon="chat" appearance="secondary" href={`/article/${props.id}#comments`}>Комментарии ({comments.length})</Button>
+						}
 						<CopyButton className={styles.interactionButton} success="Ссылка на пост скопирована" text={`https://link.fb24m.ru/article/${props.id}`} icon="share" appearance="secondary">Поделиться</CopyButton>
+						<ActionButton
+							action={saveArticle}
+							appearance="secondary"
+							icon="save"
+							fields={[{ name: 'post-id', value: `${props.id}` }]}>
+							{(await checkSavedPost(props.id)) ? 'Удалить из сохраненных' : 'Сохранить'}
+						</ActionButton>
 					</Box>
 				</div>
-				}
+
 			</Card>
 			{props.full === true &&
 				<Comments postId={props.id} />

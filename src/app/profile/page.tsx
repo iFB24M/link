@@ -21,8 +21,10 @@ const Welcome = async (): Promise<ReactElement> => {
 		<Container>
 			<UserProfile postsCount={exists<number>(posts.data?.length)} selfProfile user={user.data} />
 			<Box direction="row" alignItems="start" gap={8} className={styles.box}>
-				<Button appearance="primary" icon="add_circle" href="/post">Новый пост</Button>
+				<Button appearance="primary" icon="person" href="/profile">Профиль</Button>
 				<Button appearance="secondary" icon="delete" href="/profile/deleted">Удаленные</Button>
+				<Button appearance="secondary" icon="star" href="/profile/saved">Избранное</Button>
+				<Button appearance="transparent" icon="add_circle" href="/post">Новый пост</Button>
 			</Box>
 			<Posts controls posts={posts.data ? posts.data : []} />
 		</Container>

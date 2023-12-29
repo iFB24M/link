@@ -8,6 +8,7 @@ export interface IUser {
 	avatar?: string | null
 	subscribedTo?: string | null
 	subscribers?: number | null
+	savedArticles?: string | null
 }
 
 export interface ISetUser extends Partial<IUser> { }

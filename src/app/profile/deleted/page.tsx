@@ -20,8 +20,10 @@ const Welcome = async (): Promise<ReactElement> => {
 		<Container>
 			<UserProfile selfProfile user={user.data} postsCount={posts.length} />
 			<Box direction="row" alignItems="start" gap={8} className={styles.box}>
-				<Button icon="arrow_back" appearance="transparent" href="/profile">Назад в профиль</Button>
-				<Button appearance="primary" icon="add_circle" href="/post">Новый пост</Button>
+				<Button appearance="secondary" icon="person" href="/profile">Профиль</Button>
+				<Button appearance="primary" icon="delete" href="/profile/deleted">Удаленные</Button>
+				<Button appearance="secondary" icon="star" href="/profile/saved">Избранное</Button>
+				<Button appearance="transparent" icon="add_circle" href="/post">Новый пост</Button>
 			</Box>
 			<Posts restore controls posts={posts} />
 		</Container>
