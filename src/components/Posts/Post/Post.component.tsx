@@ -2,7 +2,6 @@ import type { ReactElement } from 'react'
 import styles from './Post.module.scss'
 import type { PostProps } from './Post.props'
 import Link from 'next/link'
-import { getUserById } from '@/services/Prisma/getUserById'
 import { formatDate } from './formatDate'
 import { exists } from '@/functions/exists'
 import { movePostToDeleted } from '@/actions/movePostToDeleted.action'
@@ -16,11 +15,12 @@ import { ActionButton } from '@/components/ActionButton/ActionButton.component'
 import { Button } from '@/ui/components/Button/Button.component'
 import { Card } from '@/ui/components/Card/Card.component'
 import { CopyButton } from '@/components/CopyButton/CopyButton.component'
+import { getUser } from '@/services/Prisma/getUser'
 
 const maxContentLength = 500
 
 export const Post = async (props: PostProps): Promise<ReactElement> => {
-	const author = await getUserById(props.authorId)
+	const author = (await getUser({ id: props.authorId })).data
 
 	// let content = props.content
 	let content = props.content.split('<br>').join('\n')

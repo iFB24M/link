@@ -1,9 +1,9 @@
 'use server'
 
-import { getUser } from './getUser'
+import { getSelf } from './getSelf'
 
 export const checkSubscription = async (channedId: number): Promise<boolean | undefined> => {
-	const user = await getUser(false)
+	const user = await getSelf(false)
 
-	return user?.subscribedTo?.includes(`,${channedId},`)
+	return user?.data?.subscribedTo?.includes(`,${channedId},`)
 }

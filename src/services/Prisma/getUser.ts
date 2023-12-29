@@ -1,37 +1,37 @@
 'use server'
 
-import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 import { prisma } from '../Prisma.service'
+import type { IUser } from '@/interfaces/IUser.interface'
+import type { IResponse } from '@/interfaces/IResponse.interface'
 
-interface IUser {
+interface IGetById {
 	id: number
-	avatar?: string | null
-	email: string
-	username: string
-	password: string
-	bio?: string | null
-	subscribedTo?: string | null
-	subscribers?: number | null
-	badge?: string | null
 }
 
-export const getUser = async (redirectAfter: boolean = true): Promise<IUser | undefined | null> => {
-	if (!cookies().has('link_saved_user') && redirectAfter) {
-		redirect('/login')
-	}
+interface IGetByUsername {
+	username: string
+}
 
-	const savedData = {
-		email: cookies().get('link_saved_user')?.value.split(':')[0],
-		password: cookies().get('link_saved_user')?.value.split(':')[1]
-	}
+interface IGetByEmail {
+	email: string
+	password: string
+}
 
-	try {
-		const user: IUser | null = await prisma.user.findUnique({
-			where: savedData
-		})
-		return user
-	} catch {
-		return undefined
+export const getUser = async (where: IGetById | IGetByUsername | IGetByEmail): Promise<IResponse<IUser>> => {
+	const user: IUser | null = await prisma.user.findUnique({ where })
+
+	if (user !== null) {
+		return {
+			ok: true,
+			code: 200,
+			message: 'success',
+			data: user
+		}
+	} else {
+		return {
+			ok: false,
+			code: 404,
+			message: 'user not found'
+		}
 	}
 }

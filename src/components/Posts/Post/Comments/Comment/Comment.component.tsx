@@ -1,13 +1,13 @@
 import type { ReactElement } from 'react'
 import type { CommentProps } from './Comment.props'
-import { getUserById } from '@/services/Prisma/getUserById'
 import styles from './Comment.module.scss'
 import { formatContent } from '../../formatContent'
 import { Card } from '@/ui/components/Card/Card.component'
 import { formatDate } from '../../formatDate'
+import { getUser } from '@/services/Prisma/getUser'
 
 export const Comment = async (props: CommentProps): Promise<ReactElement> => {
-	const user = await getUserById(props.comment.authorId)
+	const user = (await getUser({ id: props.comment.authorId })).data
 
 	return (
 		<Card>

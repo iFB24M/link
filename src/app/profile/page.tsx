@@ -12,16 +12,18 @@ import { parseUser } from '@/functions/parseUser'
 
 const Welcome = async (): Promise<ReactElement> => {
 	const user = await parseUser()
+	console.log(user)
+
 	const posts = await getPosts({ authorId: [exists(user?.id)] })
 
 	return (
 		<Container>
-			<UserProfile postsCount={posts.length} selfProfile user={user} />
+			<UserProfile postsCount={exists<number>(posts.data?.length)} selfProfile user={user} />
 			<Box direction="row" alignItems="start" gap={8} className={styles.box}>
 				<Button appearance="primary" icon="add_circle" href="/post">Новый пост</Button>
 				<Button appearance="secondary" icon="delete" href="/profile/deleted">Удаленные</Button>
 			</Box>
-			<Posts controls posts={posts} />
+			<Posts controls posts={exists(posts.data)} />
 		</Container>
 	)
 }
