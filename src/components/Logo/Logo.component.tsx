@@ -12,7 +12,7 @@ export const Logo = (): ReactNode => {
 					NextLink
 				</span>
 				<span className={styles.subtitle}>
-					Test Enviroment, 0.3.0-beta.16
+					Test Enviroment, 0.3.0-beta.18
 				</span>
 			</div>
 		</Link>
