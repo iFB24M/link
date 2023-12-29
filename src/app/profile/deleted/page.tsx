@@ -12,11 +12,13 @@ import { parseUser } from '@/functions/parseUser'
 
 const Welcome = async (): Promise<ReactElement> => {
 	const user = await parseUser()
-	const posts = await getDeletedPostsByAuthorId([exists(user?.id)])
+	const posts = await getDeletedPostsByAuthorId([exists(user?.data?.id)])
+
+	if (!user.data) return <Container>{user.message}</Container>
 
 	return (
 		<Container>
-			<UserProfile selfProfile user={user} postsCount={posts.length} />
+			<UserProfile selfProfile user={user.data} postsCount={posts.length} />
 			<Box direction="row" alignItems="start" gap={8} className={styles.box}>
 				<Button icon="arrow_back" appearance="transparent" href="/profile">Назад в профиль</Button>
 				<Button appearance="primary" icon="add_circle" href="/post">Новый пост</Button>

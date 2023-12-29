@@ -40,7 +40,7 @@ export const Editor = async (props: EditorProps): Promise<ReactElement> => {
 						<span className={styles.title}>Изменить пост</span>
 					</div>
 					<div className={styles.sidebarBlock}>
-						Автор: {user?.username}
+						Автор: {user?.data?.username}
 					</div>
 					<div className={styles.sidebarBlock}>
 						Дата публикации: {date}

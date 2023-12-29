@@ -19,7 +19,7 @@ const Messenger = async ({ params }: { params: { username: string } }): Promise<
 	/* Код извлекает информацию о пользователе, генерирует имя чата на основе предоставленного имени
 	пользователя и имени пользователя, а затем извлекает сообщения для этого чата. */
 	const user = await parseUser()
-	const chatName = await generateChatName(params.username, exists<string>(user?.username))
+	const chatName = await generateChatName(params.username, exists<string>(user?.data?.username))
 	const messages = await getMessages(chatName)
 
 	/* Блок кода проверяет, выполняется ли код в среде браузера (на стороне клиента), проверяя, определен
@@ -32,6 +32,8 @@ const Messenger = async ({ params }: { params: { username: string } }): Promise<
 		})
 	}
 
+	if (!user.data) return <Container>{user.message}</Container>
+
 	return (
 		<main className={styles.main}>
 			<Container className={styles.container}>
@@ -42,7 +44,7 @@ const Messenger = async ({ params }: { params: { username: string } }): Promise<
 					</div>
 				</div>
 				<div className={styles.messenger}>
-					<Messages user={user} messages={messages as IDisplayMessage[]} />
+					<Messages user={user.data} messages={messages as IDisplayMessage[]} />
 					<form action={addMessage} className={styles.form}>
 						<Container className={styles.formContainer}>
 							<input style={{ display: 'none' }} readOnly value={params.username} name="companion-username" />

@@ -10,7 +10,7 @@ export const createPost = async (content: string): Promise<void> => {
 	await prisma.post.create({
 		data: {
 			content: content.split('\r\n').join('<br>'),
-			authorId: exists<number>(author?.id)
+			authorId: exists<number>(author?.data?.id)
 		}
 	})
 }
