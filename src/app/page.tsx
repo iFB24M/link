@@ -14,7 +14,7 @@ const Home = async (): Promise<ReactElement> => {
 
   try {
     const subsribedTo: number[] =
-      exists(user?.subscribedTo?.split(',').filter(item => exists(item) !== '' && !isNaN(+item)).map(item => +item))
+      exists(user?.data?.subscribedTo?.split(',').filter(item => exists(item) !== '' && !isNaN(+item)).map(item => +item))
     posts = exists<IPost[]>((await getPosts({ authorId: subsribedTo })).data)
   } catch {
     console.log('user is not logged in')

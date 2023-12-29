@@ -8,7 +8,7 @@ export const Profile = async (): Promise<ReactElement> => {
 
 	return (
 		<Button appearance="transparent" icon="account_circle" href="/profile" className={styles.profile}>
-			{user?.username}
+			{user?.data?.username}
 		</Button>
 	)
 }

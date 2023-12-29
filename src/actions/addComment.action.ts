@@ -7,7 +7,7 @@ import { revalidatePath } from 'next/cache'
 
 export const addComment = async (formData: FormData): Promise<void> => {
 	const rawData = {
-		text: exists(formData.get('text')) as string,
+		text: exists<string>(formData.get('text') as string),
 		post: exists(formData.get('post-id'))
 	}
 
@@ -16,7 +16,7 @@ export const addComment = async (formData: FormData): Promise<void> => {
 	await prisma.comment.create({
 		data: {
 			postId: +rawData.post,
-			authorId: exists(user?.id),
+			authorId: exists(user?.data?.id),
 			content: rawData.text
 		}
 	})

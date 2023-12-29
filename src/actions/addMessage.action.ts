@@ -15,11 +15,11 @@ export const addMessage = async (formData: FormData): Promise<void> => {
 	const companion = await getUser({ username: rawData.companion })
 	const user = await parseUser()
 
-	const chatName = exists(companion?.data?.id) < exists(user?.id) ? `${companion?.data?.id}+${user?.id}` : `${user?.id}+${companion?.data?.id}`
+	const chatName = exists(companion?.data?.id) < exists(user?.data?.id) ? `${companion?.data?.id}+${user?.data?.id}` : `${user?.data?.id}+${companion?.data?.id}`
 
 	await prisma_addMessage({
 		chatName,
-		author: exists(user?.username),
+		author: exists(user?.data?.username),
 		content: rawData.message
 	})
 

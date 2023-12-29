@@ -12,8 +12,8 @@ export const updateBio = async (formData: FormData): Promise<void> => {
 
 	const user = await parseUser()
 
-	const email = user?.email !== null ? user?.email : ''
-	const password = user?.password !== null ? user?.password : ''
+	const email = user?.data?.email !== null ? user?.data?.email : ''
+	const password = user?.data?.password !== null ? user?.data?.password : ''
 
 	await updateUser(exists(email), exists(password), { bio: rawData.newBio })
 

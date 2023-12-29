@@ -17,12 +17,12 @@ export const subscribe = async (formData: FormData): Promise<void> => {
 			subscribers: exists(channel?.data?.subscribers) - 1
 		})
 
-		await updateUser(exists(user?.email), exists<string>(user?.password), {
-			subscribedTo: user?.subscribedTo?.split(`,${channelId},`).join('')
+		await updateUser(exists(user?.data?.email), exists<string>(user?.data?.password), {
+			subscribedTo: user?.data?.subscribedTo?.split(`,${channelId},`).join('')
 		})
 	} else {
-		await updateUser(exists(user?.email), exists<string>(user?.password), {
-			subscribedTo: user?.subscribedTo + `,${channelId},`
+		await updateUser(exists(user?.data?.email), exists<string>(user?.data?.password), {
+			subscribedTo: user?.data?.subscribedTo + `,${channelId},`
 		})
 
 		await updateUser(exists(channel?.data?.email), exists<string>(channel?.data?.password), {
