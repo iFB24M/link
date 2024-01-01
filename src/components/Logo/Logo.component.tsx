@@ -6,7 +6,7 @@ import Image from 'next/image'
 export const Logo = (): ReactNode => {
 	return (
 		<Link prefetch={false} href="/" className={styles.logo}>
-			<Image width={32} height={32} className={styles.logo} src="/logo.png" alt="fb24m Logo" />
+			<Image width={32} height={32} className={styles.icon} src="/happy-next-link.png" alt="fb24m Logo" />
 			<div className={styles.content}>
 				<span className={styles.title}>
 					NextLink
